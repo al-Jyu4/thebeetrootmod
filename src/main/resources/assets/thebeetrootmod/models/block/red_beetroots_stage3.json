@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/crop",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"crop": "thebeetrootmod:block/red_beetroots_stage_3",
+		"particle": "thebeetrootmod:block/red_beetroots_stage_3"
+	}
+}

@@ -1,0 +1,14 @@
+{
+  "nexus_completion": {
+    "subtitle": "sounds.thebeetrootmod.nexus_completion",
+    "sounds": [
+      "thebeetrootmod:nexus_completion"
+    ]
+  },
+  "nexus_empowered": {
+    "subtitle": "sounds.thebeetrootmod.nexus_empowered",
+    "sounds": [
+      "thebeetrootmod:nexus_empowered"
+    ]
+  }
+}

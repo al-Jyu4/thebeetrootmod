@@ -1,0 +1,30 @@
+{
+  "creativetab.beetroot_tab": "the Beetroot mod",
+
+  "block.thebeetrootmod.candy_beetroots": "Chioggia Beetroots",
+  "block.thebeetrootmod.golden_beetroots": "Golden Beetroots",
+  "block.thebeetrootmod.leaf_beetroots": "Leaf Beets",
+  "block.thebeetrootmod.purple_beetroots": "Nightfall Beetroots",
+  "block.thebeetrootmod.sugar_beetroots": "Sugar Beets",
+
+  "item.thebeetrootmod.candy_beetroot": "Chioggia Beetroot",
+  "item.thebeetrootmod.golden_beetroot": "Golden Beetroot",
+  "item.thebeetrootmod.leaf_beet": "Leaf Beet",
+  "item.thebeetrootmod.purple_beetroot": "Nightfall Beetroot",
+  "item.thebeetrootmod.sugar_beet": "Sugar Beet",
+
+  "item.thebeetrootmod.candy_beetroot_seeds": "Chioggia Beetroot Seeds",
+  "item.thebeetrootmod.golden_beetroot_seeds": "Golden Beetroot Seeds",
+  "item.thebeetrootmod.leaf_beet_seeds": "Leaf Beet Seeds",
+  "item.thebeetrootmod.purple_beetroot_seeds": "Nightfall Beetroot Seeds",
+  "item.thebeetrootmod.sugar_beet_seeds": "Sugar Beet Seeds",
+
+  "block.thebeetrootmod.workstation": "Workstation",
+  "thebeetrootmod.workstation_crafting": "Crafting",
+  "thebeetrootmod.workstation.error_tooltip": "No recipe found",
+  "thebeetrootmod.workstation.slot_1_tooltip": "test1",
+  "thebeetrootmod.workstation.slot_2_tooltip": "test2",
+  "thebeetrootmod.workstation.slot_3_tooltip": "test3",
+
+  "block.thebeetrootmod.altar": "Altar"
+}

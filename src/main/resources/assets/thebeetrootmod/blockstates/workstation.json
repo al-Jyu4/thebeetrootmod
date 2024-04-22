@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "thebeetrootmod:block/workstation",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "thebeetrootmod:block/workstation"
+    },
+    "facing=south": {
+      "model": "thebeetrootmod:block/workstation",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thebeetrootmod:block/workstation",
+      "y": 270
+    }
+  }
+}
