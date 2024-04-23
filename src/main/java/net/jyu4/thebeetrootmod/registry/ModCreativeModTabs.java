@@ -32,6 +32,10 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModBlocks.ALTAR.get());
                         pOutput.accept(ModItems.SUGAR_BEET_SEEDS.get());
                         pOutput.accept(ModItems.SUGAR_BEET.get());
+                        pOutput.accept(ModItems.YELLOW_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.YELLOW_BEETROOT.get());
+
+                        pOutput.accept(ModBlocks.WELL.get());
                         ///------------------------------///
                     })
                     .build());

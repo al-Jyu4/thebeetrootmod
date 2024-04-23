@@ -3,28 +3,29 @@
 
   "block.thebeetrootmod.candy_beetroots": "條紋甜菜",
   "block.thebeetrootmod.golden_beetroots": "黃金甜菜",
-  "block.thebeetrootmod.leaf_beets": "葉用甜菜",
   "block.thebeetrootmod.purple_beetroots": "暮色甜菜",
   "block.thebeetrootmod.sugar_beets": "糖用甜菜",
+  "block.thebeetrootmod.yellow_beetroots": "晨曦甜菜",
 
   "item.thebeetrootmod.candy_beetroot": "條紋甜菜",
   "item.thebeetrootmod.golden_beetroot": "黃金甜菜",
-  "item.thebeetrootmod.leaf_beet": "葉用甜菜",
   "item.thebeetrootmod.purple_beetroot": "暮色甜菜",
   "item.thebeetrootmod.sugar_beet": "糖用甜菜",
+  "item.thebeetrootmod.yellow_beetroots": "晨曦甜菜",
 
   "item.thebeetrootmod.candy_beetroot_seeds": "條紋甜菜種子",
   "item.thebeetrootmod.golden_beetroot_seeds": "黃金甜菜種子",
-  "item.thebeetrootmod.leaf_beet_seeds": "葉用甜菜種子",
   "item.thebeetrootmod.purple_beetroot_seeds": "暮色甜菜種子",
   "item.thebeetrootmod.sugar_beet_seeds": "糖用甜菜種子",
+  "item.thebeetrootmod.yellow_beetroot_seeds": "晨曦甜菜種子",
 
-  "block.thebeetrootmod.workstation": "甜菜工作台",
   "thebeetrootmod.workstation_crafting": "加工",
   "thebeetrootmod.workstation.error_tooltip": "無法加工材料",
   "thebeetrootmod.workstation.slot_1_tooltip": "測試1",
   "thebeetrootmod.workstation.slot_2_tooltip": "測試2",
   "thebeetrootmod.workstation.slot_3_tooltip": "測試3",
 
-  "block.thebeetrootmod.altar": "甜菜祭壇"
+  "block.thebeetrootmod.workstation": "甜菜工作台",
+  "block.thebeetrootmod.altar": "甜菜祭壇",
+  "block.thebeetrootmod.well": "水井"
 }

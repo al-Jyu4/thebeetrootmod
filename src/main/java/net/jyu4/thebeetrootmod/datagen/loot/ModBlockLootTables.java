@@ -22,12 +22,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-      /*
-        this.dropSelf(ModBlocks.BEETROOT_LEAVES_BLOCK.get());
-        this.dropSelf(ModBlocks.BEETROOT_FIBER_BLOCK.get());
-        this.dropSelf(ModBlocks.VERDANT_BLOCK.get());
-        this.dropSelf(ModBlocks.BEETROOT_STONE.get());
 
+        this.dropSelf(ModBlocks.WORKSTATION.get());
+        this.dropSelf(ModBlocks.ALTAR.get());
+        this.dropSelf(ModBlocks.WELL.get());
+/*
         LootItemCondition.Builder CANDY_BEETROOTS = LootItemBlockStatePropertyCondition
                 .hasBlockStateProperties(ModBlocks.CANDY_BEETROOTS.get())
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropBlock.AGE, 3));

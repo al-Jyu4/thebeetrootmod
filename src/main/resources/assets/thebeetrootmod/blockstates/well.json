@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "thebeetrootmod:block/well",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "thebeetrootmod:block/well"
+    },
+    "facing=south": {
+      "model": "thebeetrootmod:block/well",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thebeetrootmod:block/well",
+      "y": 270
+    }
+  }
+}
