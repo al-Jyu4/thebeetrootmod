@@ -19,7 +19,6 @@ import software.bernie.geckolib.GeckoLib;
 public class theBeetrootMod
 {
     public static final String MOD_ID = "thebeetrootmod";
-    private static final Logger LOGGER = LogUtils.getLogger();
 
     public theBeetrootMod()
     {

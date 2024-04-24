@@ -10,6 +10,6 @@ public class YellowBeetroots extends BeetrootBlock {
     }
 
     protected ItemLike getBaseSeedId() {
-        return ModItems.CANDY_BEETROOT_SEEDS.get();
+        return ModItems.YELLOW_BEETROOT_SEEDS.get();
     }
 }

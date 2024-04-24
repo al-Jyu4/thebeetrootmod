@@ -11,7 +11,7 @@
   "item.thebeetrootmod.golden_beetroot": "黃金甜菜",
   "item.thebeetrootmod.purple_beetroot": "暮色甜菜",
   "item.thebeetrootmod.sugar_beet": "糖用甜菜",
-  "item.thebeetrootmod.yellow_beetroots": "晨曦甜菜",
+  "item.thebeetrootmod.yellow_beetroot": "晨曦甜菜",
 
   "item.thebeetrootmod.candy_beetroot_seeds": "條紋甜菜種子",
   "item.thebeetrootmod.golden_beetroot_seeds": "黃金甜菜種子",
@@ -25,7 +25,9 @@
   "thebeetrootmod.workstation.slot_2_tooltip": "測試2",
   "thebeetrootmod.workstation.slot_3_tooltip": "測試3",
 
-  "block.thebeetrootmod.workstation": "甜菜工作台",
-  "block.thebeetrootmod.altar": "甜菜祭壇",
-  "block.thebeetrootmod.well": "水井"
+  "block.thebeetrootmod.workstation": "作業台",
+  "block.thebeetrootmod.altar": "祭壇",
+  "block.thebeetrootmod.well": "水井",
+  "block.thebeetrootmod.shrine": "神壇",
+  "block.thebeetrootmod.ritual_ring": "儀式環"
 }

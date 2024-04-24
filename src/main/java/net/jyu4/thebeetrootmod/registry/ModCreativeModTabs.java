@@ -36,6 +36,8 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.YELLOW_BEETROOT.get());
 
                         pOutput.accept(ModBlocks.WELL.get());
+                        pOutput.accept(ModBlocks.SHRINE.get());
+                        pOutput.accept(ModBlocks.RITUAL_RING.get());
                         ///------------------------------///
                     })
                     .build());

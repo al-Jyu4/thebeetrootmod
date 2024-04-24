@@ -27,5 +27,7 @@
 
   "block.thebeetrootmod.workstation": "Workstation",
   "block.thebeetrootmod.altar": "Altar",
-  "block.thebeetrootmod.well": "Well"
+  "block.thebeetrootmod.well": "Well",
+  "block.thebeetrootmod.shrine": "Shrine",
+  "block.thebeetrootmod.ritual_ring": "Ritual Ring"
 }

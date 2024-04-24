@@ -15,20 +15,24 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class WellBlock extends Block {
+public class RitualRingBlock extends Block {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    protected static final VoxelShape BASE = Block.box(0,0,0,16,2,16);
-    protected static final VoxelShape WELL = box(1,2,1,15,7,15);
-    protected static final VoxelShape INSIDE = box(4.0D, 2.0D, 4.0D, 12.0D, 7.0D, 12.0D);
-    protected static final VoxelShape SHAPE0 = Shapes.or(BASE, Shapes.join(WELL, INSIDE, BooleanOp.ONLY_FIRST));
+    protected static final VoxelShape BASE = Block.box(1,0,1,15,5,15);
+    protected static final VoxelShape INSIDE = box(4.0D, 0.1D, 4.0D, 12.0D, 5.0D, 12.0D);
+    protected static final VoxelShape FRONT0 = box(4.0D, 4.0D, 1.0D, 12.0D, 5.0D, 4.0D);
+    protected static final VoxelShape FRONT1 = box(4.0D, 4.0D, 12.0D, 12.0D, 5.0D, 15.0D);
+    protected static final VoxelShape FRONT2 = box(12.0D, 4.0D, 4.0D, 15.0D, 5.0D, 12.0D);
+    protected static final VoxelShape FRONT3 = box(1.0D, 4.0D, 4.0D, 4.0D, 5.0D, 12.0D);
+    protected static final VoxelShape SHAPE0 = Shapes.join(BASE, Shapes.or(INSIDE, FRONT0), BooleanOp.ONLY_FIRST);
+    protected static final VoxelShape SHAPE1 = Shapes.join(BASE, Shapes.or(INSIDE, FRONT1), BooleanOp.ONLY_FIRST);
+    protected static final VoxelShape SHAPE2 = Shapes.join(BASE, Shapes.or(INSIDE, FRONT2), BooleanOp.ONLY_FIRST);
+    protected static final VoxelShape SHAPE3 = Shapes.join(BASE, Shapes.or(INSIDE, FRONT3), BooleanOp.ONLY_FIRST);
 
-    public WellBlock(Properties pProperties) {
+    public RitualRingBlock(Properties pProperties) {
         super(pProperties);
     }
 
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE0;
-        /*
         return switch ((Direction) pState.getValue(FACING)) {
             case NORTH -> SHAPE0;
             case SOUTH -> SHAPE1;
@@ -36,12 +40,10 @@ public class WellBlock extends Block {
             case WEST -> SHAPE3;
             default -> SHAPE0;
         };
-
-         */
     }
 
     public VoxelShape getInteractionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return INSIDE;
+        return BASE;
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {

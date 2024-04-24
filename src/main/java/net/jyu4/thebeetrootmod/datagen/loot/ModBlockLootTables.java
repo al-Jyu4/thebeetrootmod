@@ -26,6 +26,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.WORKSTATION.get());
         this.dropSelf(ModBlocks.ALTAR.get());
         this.dropSelf(ModBlocks.WELL.get());
+        this.dropSelf(ModBlocks.SHRINE.get());
+        this.dropSelf(ModBlocks.RITUAL_RING.get());
 /*
         LootItemCondition.Builder CANDY_BEETROOTS = LootItemBlockStatePropertyCondition
                 .hasBlockStateProperties(ModBlocks.CANDY_BEETROOTS.get())

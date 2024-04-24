@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "thebeetrootmod:block/ritual_ring",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "thebeetrootmod:block/ritual_ring"
+    },
+    "facing=south": {
+      "model": "thebeetrootmod:block/ritual_ring",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thebeetrootmod:block/ritual_ring",
+      "y": 270
+    }
+  }
+}

@@ -1,7 +1,6 @@
 package net.jyu4.thebeetrootmod.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -15,14 +14,13 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class WellBlock extends Block {
+public class ShrineBlock extends Block {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    protected static final VoxelShape BASE = Block.box(0,0,0,16,2,16);
-    protected static final VoxelShape WELL = box(1,2,1,15,7,15);
-    protected static final VoxelShape INSIDE = box(4.0D, 2.0D, 4.0D, 12.0D, 7.0D, 12.0D);
-    protected static final VoxelShape SHAPE0 = Shapes.or(BASE, Shapes.join(WELL, INSIDE, BooleanOp.ONLY_FIRST));
+    protected static final VoxelShape BASE1 = Block.box(0,0,0,16,2,16);
+    protected static final VoxelShape BASE2 = box(1,2,1,15,6,15);
+    protected static final VoxelShape SHAPE0 = Shapes.or(BASE1, BASE2);
 
-    public WellBlock(Properties pProperties) {
+    public ShrineBlock(Properties pProperties) {
         super(pProperties);
     }
 
@@ -38,10 +36,6 @@ public class WellBlock extends Block {
         };
 
          */
-    }
-
-    public VoxelShape getInteractionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return INSIDE;
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
