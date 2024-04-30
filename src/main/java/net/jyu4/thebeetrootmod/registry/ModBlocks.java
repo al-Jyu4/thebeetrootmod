@@ -1,8 +1,11 @@
 package net.jyu4.thebeetrootmod.registry;
 
 import net.jyu4.thebeetrootmod.block.*;
-import net.jyu4.thebeetrootmod.theBeetrootMod;
 import net.jyu4.thebeetrootmod.block.beetroots.*;
+import net.jyu4.thebeetrootmod.block.beetroots.beets.*;
+import net.jyu4.thebeetrootmod.block.beetroots.crystals.*;
+import net.jyu4.thebeetrootmod.block.beetroots.exotics.*;
+import net.jyu4.thebeetrootmod.theBeetrootMod;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -25,9 +28,23 @@ public class ModBlocks {
     public static final RegistryObject<Block> CANDY_BEETROOTS = BLOCKS.register("candy_beetroots",() -> new CandyBeetroots(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
     public static final RegistryObject<Block> GOLDEN_BEETROOTS = BLOCKS.register("golden_beetroots",() -> new GoldenBeetroots(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
     public static final RegistryObject<Block> PURPLE_BEETROOTS = BLOCKS.register("purple_beetroots",() -> new PurpleBeetroots(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
-    public static final RegistryObject<Block> SUGAR_BEETS = BLOCKS.register("sugar_beets",() -> new SugarBeets(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
     public static final RegistryObject<Block> YELLOW_BEETROOTS = BLOCKS.register("yellow_beetroots",() -> new YellowBeetroots(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
 
+    public static final RegistryObject<Block> LEAF_BEETS = BLOCKS.register("leaf_beets",() -> new LeafBeets(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
+    public static final RegistryObject<Block> SUGAR_BEETS = BLOCKS.register("sugar_beets",() -> new SugarBeets(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
+
+    public static final RegistryObject<Block> NETHER_BEETROOTS = BLOCKS.register("nether_beetroots",() -> new NetherBeetroots(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
+    public static final RegistryObject<Block> END_BEETROOTS = BLOCKS.register("end_beetroots",() -> new EndBeetroots(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
+
+    public static final RegistryObject<Block> ECHO_BEETROOTS = BLOCKS.register("echo_beetroots",() -> new EchoBeetroots(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
+    public static final RegistryObject<Block> MISSING_BEETROOT = BLOCKS.register("lost_beetroots",() -> new MissingBeetroots(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
+
+    public static final RegistryObject<Block> AMETHYST_BEETROOTS = BLOCKS.register("amethyst_beetroots",() -> new AmethystBeetroots(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
+    public static final RegistryObject<Block> TOPAZ_BEETROOTS = BLOCKS.register("topaz_beetroots",() -> new TopazBeetroots(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
+    public static final RegistryObject<Block> SAPPHIRE_BEETROOTS = BLOCKS.register("sapphire_beetroots",() -> new SapphireBeetroots(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
+    public static final RegistryObject<Block> RUBY_BEETROOTS = BLOCKS.register("ruby_beetroots",() -> new RubyBeetroots(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
+
+    ///------------------------------///
     public static final RegistryObject<Block> WORKSTATION = registerBlock("workstation",() -> new WorkstationBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD).ignitedByLava()));
     public static final RegistryObject<Block> ALTAR = registerBlock("altar",() -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
     public static final RegistryObject<Block> WELL = registerBlock("well",() -> new WellBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));

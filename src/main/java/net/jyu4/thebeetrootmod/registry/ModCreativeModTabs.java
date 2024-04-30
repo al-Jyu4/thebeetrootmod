@@ -24,19 +24,41 @@ public class ModCreativeModTabs {
                         pOutput.accept(Items.BEETROOT);
                         pOutput.accept(ModItems.CANDY_BEETROOT_SEEDS.get());
                         pOutput.accept(ModItems.CANDY_BEETROOT.get());
-                        pOutput.accept(ModItems.GOLDEN_BEETROOT_SEEDS.get());
-                        pOutput.accept(ModItems.GOLDEN_BEETROOT.get());
                         pOutput.accept(ModItems.PURPLE_BEETROOT_SEEDS.get());
                         pOutput.accept(ModItems.PURPLE_BEETROOT.get());
-
-                        pOutput.accept(ModBlocks.ALTAR.get());
-                        pOutput.accept(ModItems.SUGAR_BEET_SEEDS.get());
-                        pOutput.accept(ModItems.SUGAR_BEET.get());
                         pOutput.accept(ModItems.YELLOW_BEETROOT_SEEDS.get());
                         pOutput.accept(ModItems.YELLOW_BEETROOT.get());
 
+                        pOutput.accept(ModBlocks.ALTAR.get());
+                        pOutput.accept(ModItems.LEAF_BEET_SEEDS.get());
+                        pOutput.accept(ModItems.LEAF_BEET.get());
+                        pOutput.accept(ModItems.SUGAR_BEET_SEEDS.get());
+                        pOutput.accept(ModItems.SUGAR_BEET.get());
+                        pOutput.accept(ModItems.ANCIENT_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.ANCIENT_BEETROOT.get());
+                        pOutput.accept(ModItems.GOLDEN_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.GOLDEN_BEETROOT.get());
+
                         pOutput.accept(ModBlocks.WELL.get());
+                        pOutput.accept(ModItems.MISSING_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.MISSING_BEETROOT.get());
+                        pOutput.accept(ModItems.ECHO_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.ECHO_BEETROOT.get());
+                        pOutput.accept(ModItems.NETHER_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.NETHER_BEETROOT.get());
+                        pOutput.accept(ModItems.END_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.END_BEETROOT.get());
+
                         pOutput.accept(ModBlocks.SHRINE.get());
+                        pOutput.accept(ModItems.AMETHYST_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.AMETHYST_BEETROOT.get());
+                        pOutput.accept(ModItems.TOPAZ_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.TOPAZ_BEETROOT.get());
+                        pOutput.accept(ModItems.SAPPHIRE_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.SAPPHIRE_BEETROOT.get());
+                        pOutput.accept(ModItems.RUBY_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.RUBY_BEETROOT.get());
+
                         pOutput.accept(ModBlocks.RITUAL_RING.get());
                         ///------------------------------///
                     })

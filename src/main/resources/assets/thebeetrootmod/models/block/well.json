@@ -5,25 +5,11 @@
 	"textures": {
 		"2": "minecraft:block/oak_planks",
 		"5": "minecraft:block/andesite",
-		"6": "minecraft:block/smooth_stone",
 		"7": "minecraft:block/cobblestone",
 		"8": "minecraft:block/cobbled_deepslate",
-		"particle": "minecraft:block/oak_planks"
+		"particle": "minecraft:block/andesite"
 	},
 	"elements": [
-		{
-			"name": "base",
-			"from": [0, 0, 0],
-			"to": [16, 2, 16],
-			"faces": {
-				"north": {"uv": [0, 14, 16, 16], "texture": "#6"},
-				"east": {"uv": [0, 14, 16, 16], "texture": "#6"},
-				"south": {"uv": [0, 14, 16, 16], "texture": "#6"},
-				"west": {"uv": [0, 14, 16, 16], "texture": "#6"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#6"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#6"}
-			}
-		},
 		{
 			"name": "left1",
 			"from": [12.5, 7, 7],
@@ -130,84 +116,88 @@
 		},
 		{
 			"name": "well1",
-			"from": [1, 2, 1],
+			"from": [1, 0, 1],
 			"to": [4, 7, 12],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, -1, 8]},
 			"faces": {
-				"north": {"uv": [12, 9, 15, 14], "texture": "#5"},
-				"east": {"uv": [0, 0, 11, 5], "texture": "#5"},
+				"north": {"uv": [12, 9, 15, 16], "texture": "#5"},
+				"east": {"uv": [0, 0, 11, 7], "texture": "#5"},
 				"south": {"uv": [0, 0, 3, 5], "texture": "#5"},
-				"west": {"uv": [1, 9, 12, 14], "texture": "#5"},
-				"up": {"uv": [12, 4, 15, 15], "texture": "#5"}
+				"west": {"uv": [1, 9, 12, 16], "texture": "#5"},
+				"up": {"uv": [12, 4, 15, 15], "texture": "#5"},
+				"down": {"uv": [12, 1, 15, 12], "texture": "#5"}
 			}
 		},
 		{
 			"name": "well2",
-			"from": [1, 2, 12],
+			"from": [1, 0, 12],
 			"to": [12, 7, 15],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, -1, 8]},
 			"faces": {
-				"north": {"uv": [0, 0, 11, 5], "texture": "#5"},
+				"north": {"uv": [0, 0, 11, 7], "texture": "#5"},
 				"east": {"uv": [0, 0, 3, 5], "texture": "#5"},
-				"south": {"uv": [1, 9, 12, 14], "texture": "#5"},
-				"west": {"uv": [12, 9, 15, 14], "texture": "#5"},
-				"up": {"uv": [4, 1, 15, 4], "texture": "#5"}
+				"south": {"uv": [1, 9, 12, 16], "texture": "#5"},
+				"west": {"uv": [12, 9, 15, 16], "texture": "#5"},
+				"up": {"uv": [4, 1, 15, 4], "texture": "#5"},
+				"down": {"uv": [4, 12, 15, 15], "texture": "#5"}
 			}
 		},
 		{
 			"name": "well3",
-			"from": [12, 2, 4],
+			"from": [12, 0, 4],
 			"to": [15, 7, 15],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, -1, 8]},
 			"faces": {
 				"north": {"uv": [0, 0, 3, 5], "texture": "#5"},
-				"east": {"uv": [1, 9, 12, 14], "texture": "#5"},
-				"south": {"uv": [12, 9, 15, 14], "texture": "#5"},
-				"west": {"uv": [0, 0, 11, 5], "texture": "#5"},
-				"up": {"uv": [1, 1, 4, 12], "texture": "#5"}
+				"east": {"uv": [1, 9, 12, 16], "texture": "#5"},
+				"south": {"uv": [12, 9, 15, 16], "texture": "#5"},
+				"west": {"uv": [0, 0, 11, 7], "texture": "#5"},
+				"up": {"uv": [1, 1, 4, 12], "texture": "#5"},
+				"down": {"uv": [1, 4, 4, 15], "texture": "#5"}
 			}
 		},
 		{
 			"name": "well4",
-			"from": [4, 2, 1],
+			"from": [4, 0, 1],
 			"to": [15, 7, 4],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, -1, 8]},
 			"faces": {
-				"north": {"uv": [1, 9, 12, 14], "texture": "#5"},
-				"east": {"uv": [12, 9, 15, 14], "texture": "#5"},
-				"south": {"uv": [0, 0, 11, 5], "texture": "#5"},
-				"up": {"uv": [1, 12, 12, 15], "texture": "#5"}
+				"north": {"uv": [1, 9, 12, 16], "texture": "#5"},
+				"east": {"uv": [12, 9, 15, 16], "texture": "#5"},
+				"south": {"uv": [0, 0, 11, 7], "texture": "#5"},
+				"up": {"uv": [1, 12, 12, 15], "texture": "#5"},
+				"down": {"uv": [1, 1, 12, 4], "texture": "#5"}
 			}
 		},
 		{
 			"name": "frame1",
-			"from": [4, 2.001, 4],
-			"to": [12, 2.001, 12],
+			"from": [4, 0, 4],
+			"to": [12, 1, 12],
 			"faces": {
-				"up": {"uv": [4, 4, 12, 12], "texture": "#7"}
+				"up": {"uv": [4, 4, 12, 12], "texture": "#7"},
+				"down": {"uv": [4, 4, 12, 12], "texture": "#5"}
 			}
 		}
 	],
 	"groups": [
-		0,
 		{
 			"name": "pole",
 			"origin": [0, -1, 0],
 			"color": 0,
-			"children": [1, 2, 3, 4]
+			"children": [0, 1, 2, 3]
 		},
 		{
 			"name": "flat",
 			"origin": [2, 12, 8],
 			"color": 0,
-			"children": [5, 6, 7, 8]
+			"children": [4, 5, 6, 7]
 		},
 		{
 			"name": "well",
 			"origin": [8, -1, 8],
 			"color": 0,
-			"children": [9, 10, 11, 12]
+			"children": [8, 9, 10, 11]
 		},
-		13
+		12
 	]
 }

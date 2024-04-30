@@ -23,23 +23,21 @@ public class RitualRingBlock extends Block {
     protected static final VoxelShape FRONT1 = box(4.0D, 4.0D, 12.0D, 12.0D, 5.0D, 15.0D);
     protected static final VoxelShape FRONT2 = box(12.0D, 4.0D, 4.0D, 15.0D, 5.0D, 12.0D);
     protected static final VoxelShape FRONT3 = box(1.0D, 4.0D, 4.0D, 4.0D, 5.0D, 12.0D);
-    protected static final VoxelShape SHAPE0 = Shapes.join(BASE, Shapes.or(INSIDE, FRONT0), BooleanOp.ONLY_FIRST);
-    protected static final VoxelShape SHAPE1 = Shapes.join(BASE, Shapes.or(INSIDE, FRONT1), BooleanOp.ONLY_FIRST);
-    protected static final VoxelShape SHAPE2 = Shapes.join(BASE, Shapes.or(INSIDE, FRONT2), BooleanOp.ONLY_FIRST);
-    protected static final VoxelShape SHAPE3 = Shapes.join(BASE, Shapes.or(INSIDE, FRONT3), BooleanOp.ONLY_FIRST);
 
     public RitualRingBlock(Properties pProperties) {
         super(pProperties);
     }
 
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return switch ((Direction) pState.getValue(FACING)) {
-            case NORTH -> SHAPE0;
-            case SOUTH -> SHAPE1;
-            case EAST -> SHAPE2;
-            case WEST -> SHAPE3;
-            default -> SHAPE0;
+        VoxelShape front0 = switch ((Direction) pState.getValue(FACING)) {
+            case NORTH -> FRONT0;
+            case SOUTH -> FRONT1;
+            case EAST -> FRONT2;
+            case WEST -> FRONT3;
+            default -> BASE;
         };
+        VoxelShape front1 = Shapes.or(INSIDE, front0);
+        return Shapes.join(BASE, Shapes.or(INSIDE, front1), BooleanOp.ONLY_FIRST);
     }
 
     public VoxelShape getInteractionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {

@@ -26,16 +26,6 @@ public class ShrineBlock extends Block {
 
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return SHAPE0;
-        /*
-        return switch ((Direction) pState.getValue(FACING)) {
-            case NORTH -> SHAPE0;
-            case SOUTH -> SHAPE1;
-            case EAST -> SHAPE2;
-            case WEST -> SHAPE3;
-            default -> SHAPE0;
-        };
-
-         */
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {

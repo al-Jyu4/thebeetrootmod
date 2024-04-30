@@ -34,7 +34,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 public class AltarBlock extends BaseEntityBlock {
-    public static final DirectionProperty FACING;
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;;
 
     protected static final VoxelShape X_SHAPE_ALTAR;
     protected static final VoxelShape Z_SHAPE_ALTAR;
@@ -66,29 +66,18 @@ public class AltarBlock extends BaseEntityBlock {
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 
-    private VoxelShape getVoxelShape(BlockState pState) {
-        Direction $$1 = (Direction)pState.getValue(FACING);
-        if ($$1 != Direction.NORTH && $$1 != Direction.SOUTH) {
-            return X_SHAPE;
-        }
-
-        return Z_SHAPE;
-    }
-
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return this.getVoxelShape(pState);
+        return switch ((Direction) pState.getValue(FACING)) {
+            case NORTH -> Z_SHAPE;
+            case SOUTH -> Z_SHAPE;
+            case EAST -> X_SHAPE;
+            case WEST -> X_SHAPE;
+            default -> Z_SHAPE;
+        };
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
-    }
-
-    public BlockState rotate(BlockState pState, Rotation pRotation) {
-        return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
-    }
-
-    public BlockState mirror(BlockState pState, Mirror pMirror) {
-        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
@@ -129,20 +118,6 @@ public class AltarBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-
-    static {
-        FACING = HorizontalDirectionalBlock.FACING;
-
-        X_SHAPE_ALTAR = Block.box(3.0, 3.0, 1.0, 13.0, 9.0, 15.0);
-        Z_SHAPE_ALTAR = Block.box(1.0, 3.0, 3.0, 15.0, 9.0, 13.0);
-
-        X_SHAPE_BASE = Block.box(2.0, 0.0, 0.0, 14.0, 3.0, 16.0);
-        Z_SHAPE_BASE = Block.box(0.0, 0.0, 2.0, 16.0, 3.0, 14.0);
-
-        X_SHAPE = Shapes.or(X_SHAPE_ALTAR, X_SHAPE_BASE);
-        Z_SHAPE = Shapes.or(Z_SHAPE_ALTAR, Z_SHAPE_BASE);
-    }
-
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()) {
@@ -170,5 +145,16 @@ public class AltarBlock extends BaseEntityBlock {
 
         return createTickerHelper(pBlockEntityType, ModBlockEntities.ALTAR_BE.get(),
                 (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1, pBlockEntity));
+    }
+
+    static {
+        X_SHAPE_ALTAR = Block.box(3.0, 3.0, 1.0, 13.0, 9.0, 15.0);
+        Z_SHAPE_ALTAR = Block.box(1.0, 3.0, 3.0, 15.0, 9.0, 13.0);
+
+        X_SHAPE_BASE = Block.box(2.0, 0.0, 0.0, 14.0, 3.0, 16.0);
+        Z_SHAPE_BASE = Block.box(0.0, 0.0, 2.0, 16.0, 3.0, 14.0);
+
+        X_SHAPE = Shapes.or(X_SHAPE_ALTAR, X_SHAPE_BASE);
+        Z_SHAPE = Shapes.or(Z_SHAPE_ALTAR, Z_SHAPE_BASE);
     }
 }

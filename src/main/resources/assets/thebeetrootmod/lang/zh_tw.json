@@ -1,23 +1,70 @@
 {
   "creativetab.beetroot_tab": "甜菜模組",
 
+
+
   "block.thebeetrootmod.candy_beetroots": "條紋甜菜",
   "block.thebeetrootmod.golden_beetroots": "黃金甜菜",
+
   "block.thebeetrootmod.purple_beetroots": "暮色甜菜",
-  "block.thebeetrootmod.sugar_beets": "糖用甜菜",
   "block.thebeetrootmod.yellow_beetroots": "晨曦甜菜",
+
+  "block.thebeetrootmod.leaf_beets": "葉用甜菜",
+  "block.thebeetrootmod.sugar_beetroots": "糖用甜菜",
+
+  "block.thebeetrootmod.echo_beetroots": "回音甜菜",
+  "block.thebeetrootmod.missing_beetroots": "缺失甜菜",
+  "block.thebeetrootmod.nether_beetroots": "煉獄甜菜",
+  "block.thebeetrootmod.end_beetroots": "歌萊甜菜",
+
+  "block.thebeetrootmod.amethyst_beetroots": "紫水晶甜菜",
+  "block.thebeetrootmod.topaz_beetroots": "黃寶石甜菜",
+  "block.thebeetrootmod.sapphire_beetroots": "藍寶石甜菜",
+  "block.thebeetrootmod.ruby_beetroots": "紅寶石甜菜",
+
+
 
   "item.thebeetrootmod.candy_beetroot": "條紋甜菜",
   "item.thebeetrootmod.golden_beetroot": "黃金甜菜",
+
   "item.thebeetrootmod.purple_beetroot": "暮色甜菜",
-  "item.thebeetrootmod.sugar_beet": "糖用甜菜",
   "item.thebeetrootmod.yellow_beetroot": "晨曦甜菜",
+
+  "item.thebeetrootmod.leaf_beet": "葉用甜菜",
+  "item.thebeetrootmod.sugar_beet": "糖用甜菜",
+
+  "item.thebeetrootmod.echo_beetroot": "回音甜菜",
+  "item.thebeetrootmod.missing_beetroot": "缺失甜菜",
+  "item.thebeetrootmod.nether_beetroot": "煉獄甜菜",
+  "item.thebeetrootmod.end_beetroot": "歌萊甜菜",
+
+  "item.thebeetrootmod.amethyst_beetroot": "紫水晶甜菜",
+  "item.thebeetrootmod.topaz_beetroot": "黃寶石甜菜",
+  "item.thebeetrootmod.sapphire_beetroot": "藍寶石甜菜",
+  "item.thebeetrootmod.ruby_beetroot": "紅寶石甜菜",
+
+
 
   "item.thebeetrootmod.candy_beetroot_seeds": "條紋甜菜種子",
   "item.thebeetrootmod.golden_beetroot_seeds": "黃金甜菜種子",
+
   "item.thebeetrootmod.purple_beetroot_seeds": "暮色甜菜種子",
-  "item.thebeetrootmod.sugar_beet_seeds": "糖用甜菜種子",
   "item.thebeetrootmod.yellow_beetroot_seeds": "晨曦甜菜種子",
+
+  "item.thebeetrootmod.leaf_beet_seeds": "葉用甜菜種子",
+  "item.thebeetrootmod.sugar_beet_seeds": "糖用甜菜種子",
+
+  "item.thebeetrootmod.echo_beetroot_seeds": "回音甜菜種子",
+  "item.thebeetrootmod.missing_beetroot_seeds": "缺失甜菜種子",
+  "item.thebeetrootmod.nether_beetroot_seeds": "煉獄甜菜種子",
+  "item.thebeetrootmod.end_beetroot_seeds": "歌萊甜菜種子",
+
+  "item.thebeetrootmod.amethyst_beetroot_seeds": "紫水晶甜菜種子",
+  "item.thebeetrootmod.topaz_beetroot_seeds": "黃寶石甜菜種子",
+  "item.thebeetrootmod.sapphire_beetroot_seeds": "藍寶石甜菜種子",
+  "item.thebeetrootmod.ruby_beetroot_seeds": "紅寶石甜菜種子",
+
+
 
   "thebeetrootmod.workstation_crafting": "加工",
   "thebeetrootmod.workstation.error_tooltip": "無法加工材料",

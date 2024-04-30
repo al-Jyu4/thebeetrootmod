@@ -3,21 +3,69 @@
 
   "block.thebeetrootmod.candy_beetroots": "Candy Beetroots",
   "block.thebeetrootmod.golden_beetroots": "Golden Beetroots",
+
   "block.thebeetrootmod.purple_beetroots": "Nightfall Beetroots",
-  "block.thebeetrootmod.sugar_beetroots": "Sugar Beets",
   "block.thebeetrootmod.yellow_beetroots": "Dawn-break Beetroots",
+
+  "block.thebeetrootmod.leaf_beets": "Leaf Beets",
+  "block.thebeetrootmod.sugar_beets": "Sugar Beets",
+  "block.thebeetrootmod.ancient_beetroots": "Ancient Beetroots",
+
+  "block.thebeetrootmod.echo_beetroots": "Echo Beetroots",
+  "block.thebeetrootmod.missing_beetroots": "Missing Beetroots",
+  "block.thebeetrootmod.nether_beetroots": "Hellfire Beetroots",
+  "block.thebeetrootmod.end_beetroots": "Chorus Beetroots",
+
+  "block.thebeetrootmod.amethyst_beetroots": "Amethyst Beetroots",
+  "block.thebeetrootmod.topaz_beetroots": "Topaz Beetroots",
+  "block.thebeetrootmod.sapphire_beetroots": "Sapphire Beetroots",
+  "block.thebeetrootmod.ruby_beetroots": "Ruby Beetroots",
+
+
 
   "item.thebeetrootmod.candy_beetroot": "Candy Beetroot",
   "item.thebeetrootmod.golden_beetroot": "Golden Beetroot",
+
   "item.thebeetrootmod.purple_beetroot": "Nightfall Beetroot",
-  "item.thebeetrootmod.sugar_beet": "Sugar Beet",
   "item.thebeetrootmod.yellow_beetroot": "Dawn-break Beetroot",
+
+  "item.thebeetrootmod.leaf_beet": "Leaf Beat",
+  "item.thebeetrootmod.sugar_beet": "Sugar Beet",
+  "item.thebeetrootmod.ancient_beetroot": "Ancient Beetroot",
+
+  "item.thebeetrootmod.echo_beetroot": "Echo Beetroot",
+  "item.thebeetrootmod.missing_beetroot": "Missing Beetroot",
+  "item.thebeetrootmod.nether_beetroot": "Hellfire Beetroot",
+  "item.thebeetrootmod.end_beetroot": "Chorus Beetroot",
+
+  "item.thebeetrootmod.amethyst_beetroot": "Amethyst Beetroot",
+  "item.thebeetrootmod.topaz_beetroot": "Topaz Beetroot",
+  "item.thebeetrootmod.sapphire_beetroot": "Sapphire Beetroot",
+  "item.thebeetrootmod.ruby_beetroot": "Ruby Beetroot",
+
+
 
   "item.thebeetrootmod.candy_beetroot_seeds": "Candy Beetroot Seeds",
   "item.thebeetrootmod.golden_beetroot_seeds": "Golden Beetroot Seeds",
+
   "item.thebeetrootmod.purple_beetroot_seeds": "Nightfall Beetroot Seeds",
-  "item.thebeetrootmod.sugar_beet_seeds": "Sugar Beet Seeds",
   "item.thebeetrootmod.yellow_beetroot_seeds": "Dawn-break Beetroot Seeds",
+
+  "item.thebeetrootmod.leaf_beet_seeds": "Leaf Beet Seeds",
+  "item.thebeetrootmod.sugar_beet_seeds": "Sugar Beet Seeds",
+  "item.thebeetrootmod.ancient_beetroot_seeds": "Ancient Beetroot Seeds",
+
+  "item.thebeetrootmod.echo_beetroot_seeds": "Echo Beetroot Seeds",
+  "item.thebeetrootmod.missing_beetroot_seeds": "Missing Beetroot Seeds",
+  "item.thebeetrootmod.nether_beetroot_seeds": "Hellfire Beetroot Seeds",
+  "item.thebeetrootmod.end_beetroot_seeds": "Chorus Beetroot Seeds",
+
+  "item.thebeetrootmod.amethyst_beetroot_seeds": "Amethyst Beetroot Seeds",
+  "item.thebeetrootmod.topaz_beetroot_seeds": "Topaz Beetroot Seeds",
+  "item.thebeetrootmod.sapphire_beetroot_seeds": "Sapphire Beetroot Seeds",
+  "item.thebeetrootmod.ruby_beetroot_seeds": "Ruby Beetroot Seeds",
+
+
 
   "thebeetrootmod.workstation_crafting": "Crafting",
   "thebeetrootmod.workstation.error_tooltip": "No recipe found",

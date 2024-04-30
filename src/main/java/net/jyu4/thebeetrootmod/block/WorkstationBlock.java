@@ -29,7 +29,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class WorkstationBlock extends Block {
     private static final Component CONTAINER_TITLE = Component.translatable("thebeetrootmod.workstation_crafting");
-    public static final DirectionProperty FACING;
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;;
     protected static final VoxelShape X_LEGS;
     protected static final VoxelShape Z_LEGS;
     protected static final VoxelShape X_SHAPE;
@@ -69,29 +69,18 @@ public class WorkstationBlock extends Block {
         return new SimpleMenuProvider((p_277304_, p_277305_, p_277306_) -> new WorkstationMenu(p_277304_, p_277305_, ContainerLevelAccess.create(pLevel, pPos)), CONTAINER_TITLE);
     }
 
-    private VoxelShape getVoxelShape(BlockState pState) {
-        Direction $$1 = (Direction)pState.getValue(FACING);
-        if ($$1 != Direction.NORTH && $$1 != Direction.SOUTH) {
-            return X_SHAPE;
-        }
-
-        return Z_SHAPE;
-    }
-
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return this.getVoxelShape(pState);
-    }
-
-    public BlockState rotate(BlockState pState, Rotation pRotation) {
-        return (BlockState)pState.setValue(FACING, pRotation.rotate((Direction)pState.getValue(FACING)));
-    }
-
-    public BlockState mirror(BlockState pState, Mirror pMirror) {
-        return pState.rotate(pMirror.getRotation((Direction)pState.getValue(FACING)));
+        return switch ((Direction) pState.getValue(FACING)) {
+            case NORTH -> Z_SHAPE;
+            case SOUTH -> Z_SHAPE;
+            case EAST -> X_SHAPE;
+            case WEST -> X_SHAPE;
+            default -> Z_SHAPE;
+        };
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(new Property[]{FACING});
+        pBuilder.add(FACING);
     }
 
     public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
@@ -99,8 +88,6 @@ public class WorkstationBlock extends Block {
     }
 
     static {
-        FACING = HorizontalDirectionalBlock.FACING;
-
         X_SHAPE_TABLE = Block.box(2.0, 5.0, 0.0, 14.0, 8.0, 16.0);
         Z_SHAPE_TABLE = Block.box(0.0, 5.0, 2.0, 16.0, 8.0, 14.0);
 
