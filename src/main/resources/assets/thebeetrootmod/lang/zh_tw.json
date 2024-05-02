@@ -1,5 +1,6 @@
 {
-  "creativetab.beetroot_tab": "甜菜模組",
+  "thebeetrootmod.beetroot_ingredients": "各種甜菜",
+  "thebeetrootmod.beetroot_machinery": "甜菜模組",
 
 
 
@@ -42,6 +43,9 @@
   "item.thebeetrootmod.topaz_beetroot": "黃寶石甜菜",
   "item.thebeetrootmod.sapphire_beetroot": "藍寶石甜菜",
   "item.thebeetrootmod.ruby_beetroot": "紅寶石甜菜",
+
+  "item.thebeetrootmod.sanguine_beetroot": "血紅甜菜",
+  "item.thebeetrootmod.test_beetroot1": "璀璨甜菜",
 
 
 

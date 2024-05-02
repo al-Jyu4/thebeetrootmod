@@ -1,7 +1,8 @@
 package net.jyu4.thebeetrootmod;
 
+import net.jyu4.thebeetrootmod.creativetab.IngredientsTab;
+import net.jyu4.thebeetrootmod.creativetab.MachineryTab;
 import net.jyu4.thebeetrootmod.gui.*;
-import com.mojang.logging.LogUtils;
 import net.jyu4.thebeetrootmod.registry.*;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
@@ -12,7 +13,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;
 
 @Mod(net.jyu4.thebeetrootmod.theBeetrootMod.MOD_ID)
@@ -33,7 +33,8 @@ public class theBeetrootMod
 
         ModMenuTypes.register(modEventBus);
 
-        ModCreativeModTabs.register(modEventBus);
+        IngredientsTab.register(modEventBus);
+        MachineryTab.register(modEventBus);
 
         GeckoLib.initialize();
         ///------------------------------///
