@@ -55,6 +55,13 @@ public class IngredientsTab {
                         pOutput.accept(ModItems.SAPPHIRE_BEETROOT.get());
                         pOutput.accept(ModItems.RUBY_BEETROOT_SEEDS.get());
                         pOutput.accept(ModItems.RUBY_BEETROOT.get());
+
+                        pOutput.accept(ModItems.ARCANE_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.ARCANE_BEETROOT.get());
+                        pOutput.accept(ModItems.STARDUST_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.STARDUST_BEETROOT.get());
+                        pOutput.accept(ModItems.SANGUINE_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.SANGUINE_BEETROOT.get());
                         ///------------------------------///
                     })
                     .build());

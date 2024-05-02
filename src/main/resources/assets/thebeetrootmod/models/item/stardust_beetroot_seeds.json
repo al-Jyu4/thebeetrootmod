@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "thebeetrootmod:item/stardust_beetroot_seeds",
+    "layer1": "thebeetrootmod:item/base_beetroot_seeds"
+  }
+}

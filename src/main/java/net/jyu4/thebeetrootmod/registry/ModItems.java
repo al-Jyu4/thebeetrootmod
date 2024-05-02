@@ -50,6 +50,14 @@ public class ModItems {
     public static final RegistryObject<Item> RUBY_BEETROOT = ITEMS.register("ruby_beetroot",() -> new Item(new Item.Properties().food(Foods.BEETROOT)));
     public static final RegistryObject<Item> RUBY_BEETROOT_SEEDS = ITEMS.register("ruby_beetroot_seeds",() -> new ItemNameBlockItem(ModBlocks.RUBY_BEETROOTS.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> SANGUINE_BEETROOT = ITEMS.register("sanguine_beetroot",() -> new Item(new Item.Properties().food(Foods.BEETROOT)));
+    public static final RegistryObject<Item> SANGUINE_BEETROOT_SEEDS = ITEMS.register("sanguine_beetroot_seeds",() -> new ItemNameBlockItem(ModBlocks.YELLOW_BEETROOTS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> STARDUST_BEETROOT = ITEMS.register("stardust_beetroot",() -> new Item(new Item.Properties().food(Foods.BEETROOT)));
+    public static final RegistryObject<Item> STARDUST_BEETROOT_SEEDS = ITEMS.register("stardust_beetroot_seeds",() -> new ItemNameBlockItem(ModBlocks.YELLOW_BEETROOTS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ARCANE_BEETROOT = ITEMS.register("arcane_beetroot",() -> new Item(new Item.Properties().food(Foods.BEETROOT)));
+    public static final RegistryObject<Item> ARCANE_BEETROOT_SEEDS = ITEMS.register("arcane_beetroot_seeds",() -> new ItemNameBlockItem(ModBlocks.YELLOW_BEETROOTS.get(), new Item.Properties()));
     ///------------------------------///
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
