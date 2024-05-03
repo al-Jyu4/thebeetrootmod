@@ -6,9 +6,8 @@ import net.minecraft.world.food.FoodProperties;
 
 public class ModFoods {
     public static final FoodProperties GOLDEN_BEETROOT = (new FoodProperties.Builder()).nutrition(4).saturationMod(1.2F).effect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1), 1.0F).effect(new MobEffectInstance(MobEffects.ABSORPTION, 2400, 0), 1.0F).alwaysEat().build();
-    public static final FoodProperties END_BEETROOT = (new FoodProperties.Builder()).nutrition(4).saturationMod(0.3F).alwaysEat().build();
-    public static final FoodProperties BEET = (new FoodProperties.Builder()).nutrition(4).saturationMod(0.3F).alwaysEat().build();
-
+    public static final FoodProperties END_BEETROOT = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).alwaysEat().build();
+    public static final FoodProperties ECHO_BEETROOT = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).alwaysEat().build();
 
     public static final FoodProperties CANDY_BEETROOT = beetroot().build();
     public static final FoodProperties PURPLE_BEETROOT = beetroot().build();

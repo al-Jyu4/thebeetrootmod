@@ -14,6 +14,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 
 public class EndBeetrootItem extends Item {
@@ -21,11 +22,12 @@ public class EndBeetrootItem extends Item {
         super(pProperties);
     }
 
-    public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pEntityLiving) {
+    @Override
+    public @NotNull ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pEntityLiving) {
         ItemStack itemstack = super.finishUsingItem(pStack, pLevel, pEntityLiving);
         if (!pLevel.isClientSide && pEntityLiving instanceof Player) {
             Player player = (Player) pEntityLiving;
-            final double maxDistance = 64.0;
+            final double maxDistance = 80.0;
             HitResult hitResult = getPlayerPOVHitResult(pLevel, player, ClipContext.Fluid.NONE, maxDistance);
 
             if (hitResult.getType() == HitResult.Type.BLOCK) {
@@ -39,12 +41,15 @@ public class EndBeetrootItem extends Item {
 
                 Vec3 vec3 = player.position();
                 pLevel.gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(player));
-                net.minecraftforge.event.entity.EntityTeleportEvent.ChorusFruit event = net.minecraftforge.event.ForgeEventFactory.onChorusFruitTeleport(player, targetPos.getX() + 0.5, targetPos.getY(), targetPos.getZ() + 0.5);
+                player.teleportTo(targetPos.getX() + 0.5, targetPos.getY(), targetPos.getZ() + 0.5);
+                /*net.minecraftforge.event.entity.EntityTeleportEvent.ChorusFruit event = net.minecraftforge.event.ForgeEventFactory.onChorusFruitTeleport(player, targetPos.getX() + 0.5, targetPos.getY(), targetPos.getZ() + 0.5);
                 if (!event.isCanceled() && player.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true)) {
                     SoundEvent soundevent = SoundEvents.CHORUS_FRUIT_TELEPORT;
                     pLevel.playSound(null, vec3.x, vec3.y, vec3.z, soundevent, SoundSource.PLAYERS, 1.0F, 1.0F);
                     player.playSound(soundevent, 1.0F, 1.0F);
                 }
+
+                 */
             }
         }
 

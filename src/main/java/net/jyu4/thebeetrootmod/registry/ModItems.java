@@ -1,5 +1,6 @@
 package net.jyu4.thebeetrootmod.registry;
 
+import net.jyu4.thebeetrootmod.item.EchoBeetrootItem;
 import net.jyu4.thebeetrootmod.item.EndBeetrootItem;
 import net.jyu4.thebeetrootmod.theBeetrootMod;
 import net.minecraft.world.food.Foods;
@@ -36,7 +37,7 @@ public class ModItems {
     public static final RegistryObject<Item> END_BEETROOT = ITEMS.register("end_beetroot",() -> new EndBeetrootItem(new Item.Properties().food(ModFoods.END_BEETROOT)));
     public static final RegistryObject<Item> END_BEETROOT_SEEDS = ITEMS.register("end_beetroot_seeds",() -> new ItemNameBlockItem(ModBlocks.END_BEETROOTS.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> ECHO_BEETROOT = ITEMS.register("echo_beetroot",() -> new Item(new Item.Properties().food(Foods.BEETROOT)));
+    public static final RegistryObject<Item> ECHO_BEETROOT = ITEMS.register("echo_beetroot",() -> new EchoBeetrootItem(new Item.Properties().food(ModFoods.ECHO_BEETROOT)));
     public static final RegistryObject<Item> ECHO_BEETROOT_SEEDS = ITEMS.register("echo_beetroot_seeds",() -> new ItemNameBlockItem(ModBlocks.ECHO_BEETROOTS.get(), new Item.Properties()));
     public static final RegistryObject<Item> MISSING_BEETROOT = ITEMS.register("missing_beetroot",() -> new Item(new Item.Properties().food(Foods.BEETROOT)));
     public static final RegistryObject<Item> MISSING_BEETROOT_SEEDS = ITEMS.register("missing_beetroot_seeds",() -> new ItemNameBlockItem(ModBlocks.MISSING_BEETROOT.get(), new Item.Properties()));
