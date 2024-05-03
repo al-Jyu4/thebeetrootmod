@@ -20,11 +20,6 @@ public class MachineryTab {
                     .title(Component.translatable("thebeetrootmod.beetroot_machinery"))
                     .displayItems((pParameters, pOutput) -> {
                         ///------------------------------///
-                        pOutput.accept(ModBlocks.WORKSTATION.get());
-                        pOutput.accept(ModBlocks.ALTAR.get());
-                        pOutput.accept(ModBlocks.WELL.get());
-                        pOutput.accept(ModBlocks.SHRINE.get());
-                        pOutput.accept(ModBlocks.RITUAL_RING.get());
                         ///------------------------------///
                     })
                     .build());

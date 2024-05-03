@@ -1,5 +1,6 @@
 package net.jyu4.thebeetrootmod.creativetab;
 
+import net.jyu4.thebeetrootmod.registry.ModBlocks;
 import net.jyu4.thebeetrootmod.registry.ModItems;
 import net.jyu4.thebeetrootmod.theBeetrootMod;
 import net.minecraft.core.registries.Registries;
@@ -20,6 +21,7 @@ public class IngredientsTab {
                     .title(Component.translatable("thebeetrootmod.beetroot_ingredients"))
                     .displayItems((pParameters, pOutput) -> {
                         ///------------------------------///
+                        pOutput.accept(ModBlocks.WORKSTATION.get());
                         pOutput.accept(Items.BEETROOT_SEEDS);
                         pOutput.accept(Items.BEETROOT);
                         pOutput.accept(ModItems.CANDY_BEETROOT_SEEDS.get());
@@ -29,6 +31,7 @@ public class IngredientsTab {
                         pOutput.accept(ModItems.YELLOW_BEETROOT_SEEDS.get());
                         pOutput.accept(ModItems.YELLOW_BEETROOT.get());
 
+                        pOutput.accept(ModBlocks.ALTAR.get());
                         pOutput.accept(ModItems.LEAF_BEET_SEEDS.get());
                         pOutput.accept(ModItems.LEAF_BEET.get());
                         pOutput.accept(ModItems.SUGAR_BEET_SEEDS.get());
@@ -38,6 +41,7 @@ public class IngredientsTab {
                         pOutput.accept(ModItems.GOLDEN_BEETROOT_SEEDS.get());
                         pOutput.accept(ModItems.GOLDEN_BEETROOT.get());
 
+                        pOutput.accept(ModBlocks.WELL.get());
                         pOutput.accept(ModItems.MISSING_BEETROOT_SEEDS.get());
                         pOutput.accept(ModItems.MISSING_BEETROOT.get());
                         pOutput.accept(ModItems.ECHO_BEETROOT_SEEDS.get());
@@ -47,6 +51,7 @@ public class IngredientsTab {
                         pOutput.accept(ModItems.END_BEETROOT_SEEDS.get());
                         pOutput.accept(ModItems.END_BEETROOT.get());
 
+                        pOutput.accept(ModBlocks.SHRINE.get());
                         pOutput.accept(ModItems.AMETHYST_BEETROOT_SEEDS.get());
                         pOutput.accept(ModItems.AMETHYST_BEETROOT.get());
                         pOutput.accept(ModItems.TOPAZ_BEETROOT_SEEDS.get());
@@ -56,6 +61,7 @@ public class IngredientsTab {
                         pOutput.accept(ModItems.RUBY_BEETROOT_SEEDS.get());
                         pOutput.accept(ModItems.RUBY_BEETROOT.get());
 
+                        pOutput.accept(ModBlocks.RITUAL_RING.get());
                         pOutput.accept(ModItems.ARCANE_BEETROOT_SEEDS.get());
                         pOutput.accept(ModItems.ARCANE_BEETROOT.get());
                         pOutput.accept(ModItems.STARDUST_BEETROOT_SEEDS.get());

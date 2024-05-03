@@ -78,5 +78,7 @@
   "block.thebeetrootmod.altar": "Altar",
   "block.thebeetrootmod.well": "Well",
   "block.thebeetrootmod.shrine": "Shrine",
-  "block.thebeetrootmod.ritual_ring": "Ritual Ring"
+  "block.thebeetrootmod.ritual_ring": "Ritual Ring",
+
+  "item.thebeetrootmod.unused_beetroot_item": "Unused Beetroot"
 }

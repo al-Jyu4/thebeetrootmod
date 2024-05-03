@@ -79,7 +79,8 @@
   "item.thebeetrootmod.ice_beetroot": "寒冰甜菜",
   "item.thebeetrootmod.poisonous_beetroot": "劇毒甜菜",
 
-
+  "thebeetrootmod.teleport.death": "已傳送到死亡地點",
+  "thebeetrootmod.teleport.death.dimension_error": "無法傳送到死亡地點",
 
   "thebeetrootmod.workstation_crafting": "加工",
   "thebeetrootmod.workstation.error_tooltip": "無法加工材料",
@@ -91,5 +92,6 @@
   "block.thebeetrootmod.altar": "祭壇",
   "block.thebeetrootmod.well": "水井",
   "block.thebeetrootmod.shrine": "神壇",
-  "block.thebeetrootmod.ritual_ring": "儀式環"
+  "block.thebeetrootmod.ritual_ring": "儀式環",
+  "item.thebeetrootmod.unused_beetroot_item": "未使用的甜菜"
 }
