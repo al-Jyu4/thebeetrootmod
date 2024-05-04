@@ -1,6 +1,6 @@
 package net.jyu4.thebeetrootmod.datagen;
 
-import net.jyu4.thebeetrootmod.theBeetrootMod;
+import net.jyu4.thebeetrootmod.TheBeetrootMod;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.concurrent.CompletableFuture;
 
-@Mod.EventBusSubscriber(modid = theBeetrootMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = TheBeetrootMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {

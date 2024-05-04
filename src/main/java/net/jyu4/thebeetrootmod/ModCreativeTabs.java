@@ -1,8 +1,7 @@
-package net.jyu4.thebeetrootmod.creativetab;
+package net.jyu4.thebeetrootmod;
 
-import net.jyu4.thebeetrootmod.registry.ModBlocks;
-import net.jyu4.thebeetrootmod.registry.ModItems;
-import net.jyu4.thebeetrootmod.theBeetrootMod;
+import net.jyu4.thebeetrootmod.block.ModBlocks;
+import net.jyu4.thebeetrootmod.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -12,13 +11,13 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-public class IngredientsTab {
+public class ModCreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, theBeetrootMod.MOD_ID);
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, TheBeetrootMod.MODID);
 
-    public static final RegistryObject<CreativeModeTab> BEETROOT_INGREDIENTS = CREATIVE_MODE_TABS.register("thebeetrootmod_ingredients",
+    public static final RegistryObject<CreativeModeTab> BEETROOT_INGREDIENTS = CREATIVE_MODE_TABS.register("tab.thebeetrootmod_ingredients",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(Items.BEETROOT))
-                    .title(Component.translatable("thebeetrootmod.beetroot_ingredients"))
+                    .title(Component.translatable("tab.thebeetrootmod.beetroot_ingredients"))
                     .displayItems((pParameters, pOutput) -> {
                         ///------------------------------///
                         pOutput.accept(ModBlocks.WORKSTATION.get());
@@ -48,8 +47,8 @@ public class IngredientsTab {
                         pOutput.accept(ModItems.ECHO_BEETROOT.get());
                         pOutput.accept(ModItems.NETHER_BEETROOT_SEEDS.get());
                         pOutput.accept(ModItems.NETHER_BEETROOT.get());
-                        pOutput.accept(ModItems.END_BEETROOT_SEEDS.get());
-                        pOutput.accept(ModItems.END_BEETROOT.get());
+                        pOutput.accept(ModItems.CHORUS_BEETROOT_SEEDS.get());
+                        pOutput.accept(ModItems.CHORUS_BEETROOT.get());
 
                         pOutput.accept(ModBlocks.SHRINE.get());
                         pOutput.accept(ModItems.AMETHYST_BEETROOT_SEEDS.get());

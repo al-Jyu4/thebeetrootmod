@@ -1,6 +1,6 @@
 package net.jyu4.thebeetrootmod.datagen;
 
-import net.jyu4.thebeetrootmod.theBeetrootMod;
+import net.jyu4.thebeetrootmod.TheBeetrootMod;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, theBeetrootMod.MOD_ID, existingFileHelper);
+        super(output, TheBeetrootMod.MODID, existingFileHelper);
     }
 
     @Override
@@ -64,11 +64,11 @@ public class ModItemModelProvider extends ItemModelProvider {
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(theBeetrootMod.MOD_ID,"item/" + item.getId().getPath()));
+                new ResourceLocation(TheBeetrootMod.MODID,"item/" + item.getId().getPath()));
     }
 
     public void evenSimplerBlockItem(RegistryObject<Block> block) {
-        this.withExistingParent(theBeetrootMod.MOD_ID + ":" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
+        this.withExistingParent(TheBeetrootMod.MODID + ":" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
                 modLoc("block/" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath()));
     }
 
@@ -79,34 +79,34 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     public void fenceItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/fence_inventory"))
-                .texture("texture",  new ResourceLocation(theBeetrootMod.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+                .texture("texture",  new ResourceLocation(TheBeetrootMod.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
     public void buttonItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/button_inventory"))
-                .texture("texture",  new ResourceLocation(theBeetrootMod.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+                .texture("texture",  new ResourceLocation(TheBeetrootMod.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
     public void wallItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/wall_inventory"))
-                .texture("wall",  new ResourceLocation(theBeetrootMod.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+                .texture("wall",  new ResourceLocation(TheBeetrootMod.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
     private ItemModelBuilder handheldItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/handheld")).texture("layer0",
-                new ResourceLocation(theBeetrootMod.MOD_ID,"item/" + item.getId().getPath()));
+                new ResourceLocation(TheBeetrootMod.MODID,"item/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleBlockItem(RegistryObject<Block> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(theBeetrootMod.MOD_ID,"item/" + item.getId().getPath()));
+                new ResourceLocation(TheBeetrootMod.MODID,"item/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleBlockItemBlockTexture(RegistryObject<Block> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(theBeetrootMod.MOD_ID,"block/" + item.getId().getPath()));
+                new ResourceLocation(TheBeetrootMod.MODID,"block/" + item.getId().getPath()));
     }
 }

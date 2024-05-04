@@ -1,6 +1,6 @@
 package net.jyu4.thebeetrootmod.datagen;
 
-import net.jyu4.thebeetrootmod.theBeetrootMod;
+import net.jyu4.thebeetrootmod.TheBeetrootMod;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -11,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ModBlockTagGenerator extends BlockTagsProvider {
     public ModBlockTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, theBeetrootMod.MOD_ID, existingFileHelper);
+        super(output, lookupProvider, TheBeetrootMod.MODID, existingFileHelper);
     }
 
     @Override

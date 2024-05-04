@@ -1,8 +1,7 @@
 package net.jyu4.thebeetrootmod.gui;
 
-import net.jyu4.thebeetrootmod.block.entity.AltarEntity;
-import net.jyu4.thebeetrootmod.registry.ModBlocks;
-import net.jyu4.thebeetrootmod.registry.ModMenuTypes;
+import net.jyu4.thebeetrootmod.block.blockentity.AltarEntity;
+import net.jyu4.thebeetrootmod.block.ModBlocks;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

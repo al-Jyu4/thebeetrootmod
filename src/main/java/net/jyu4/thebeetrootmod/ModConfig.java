@@ -2,7 +2,7 @@ package net.jyu4.thebeetrootmod;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class Config {
+public class ModConfig {
     public static final String CATEGORY_GENERAL = "general";
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static ForgeConfigSpec SPEC;

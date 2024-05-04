@@ -1,7 +1,7 @@
 package net.jyu4.thebeetrootmod.recipe;
 
 import com.google.gson.JsonObject;
-import net.jyu4.thebeetrootmod.theBeetrootMod;
+import net.jyu4.thebeetrootmod.TheBeetrootMod;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
@@ -84,7 +84,7 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
 
     public static class Serializer implements RecipeSerializer<AltarRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID = new ResourceLocation(theBeetrootMod.MOD_ID, "altar");
+        public static final ResourceLocation ID = new ResourceLocation(TheBeetrootMod.MODID, "altar");
 
         @Override
         public AltarRecipe fromJson(ResourceLocation p_266953_, JsonObject p_266720_) {

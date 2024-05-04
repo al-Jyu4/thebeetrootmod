@@ -1,6 +1,6 @@
 package net.jyu4.thebeetrootmod.gui;
 
-import net.jyu4.thebeetrootmod.theBeetrootMod;
+import net.jyu4.thebeetrootmod.TheBeetrootMod;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.CyclingSlotBackground;
 import net.minecraft.client.gui.screens.inventory.ItemCombinerScreen;
@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
 public class WorkstationScreen extends ItemCombinerScreen<WorkstationMenu> {
-    private static final ResourceLocation SMITHING_LOCATION = new ResourceLocation(theBeetrootMod.MOD_ID, "textures/gui/workstation_gui.png");
+    private static final ResourceLocation SMITHING_LOCATION = new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/workstation_gui.png");
     private static final ResourceLocation EMPTY_SLOT_SMITHING_TEMPLATE_ARMOR_TRIM = new ResourceLocation("item/empty_slot_smithing_template_armor_trim");
     private static final ResourceLocation EMPTY_SLOT_SMITHING_TEMPLATE_NETHERITE_UPGRADE = new ResourceLocation("item/empty_slot_smithing_template_netherite_upgrade");
     private static final Component MISSING_TEMPLATE_TOOLTIP = Component.translatable("thebeetrootmod.workstation.slot_1_tooltip");

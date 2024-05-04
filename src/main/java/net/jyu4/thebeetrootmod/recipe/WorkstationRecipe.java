@@ -1,7 +1,6 @@
 package net.jyu4.thebeetrootmod.recipe;
 
 import com.google.gson.JsonObject;
-import net.jyu4.thebeetrootmod.registry.ModRecipeType;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;

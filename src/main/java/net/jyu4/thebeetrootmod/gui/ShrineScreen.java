@@ -9,11 +9,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
+public class ShrineScreen extends AbstractContainerScreen<AltarMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/altar_gui.png");
+            new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/base_gui.png");
 
-    public AltarScreen(AltarMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+    public ShrineScreen(AltarMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
 
@@ -26,14 +26,6 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         int y = (height - imageHeight) / 2;
 
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
-
-        //renderProgressArrow(guiGraphics, x, y);
-    }
-
-    private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
-        if(menu.isCrafting()) {
-            guiGraphics.blit(TEXTURE, x + 85, y + 30, 176, 0, 8, menu.getScaledProgress());
-        }
     }
 
     @Override

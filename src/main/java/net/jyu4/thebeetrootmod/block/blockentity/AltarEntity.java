@@ -1,8 +1,7 @@
-package net.jyu4.thebeetrootmod.block.entity;
+package net.jyu4.thebeetrootmod.block.blockentity;
 
 import net.jyu4.thebeetrootmod.gui.AltarMenu;
 import net.jyu4.thebeetrootmod.recipe.AltarRecipe;
-import net.jyu4.thebeetrootmod.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

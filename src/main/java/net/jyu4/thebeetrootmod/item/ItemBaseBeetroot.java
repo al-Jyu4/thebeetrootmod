@@ -10,8 +10,8 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BaseBeetrootItem extends Item {
-    public BaseBeetrootItem(Properties pProperties) {
+public class ItemBaseBeetroot extends Item {
+    public ItemBaseBeetroot(Properties pProperties) {
         super(pProperties);
     }
 

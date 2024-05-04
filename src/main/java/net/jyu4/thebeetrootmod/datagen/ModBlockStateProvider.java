@@ -1,6 +1,6 @@
 package net.jyu4.thebeetrootmod.datagen;
 
-import net.jyu4.thebeetrootmod.theBeetrootMod;
+import net.jyu4.thebeetrootmod.TheBeetrootMod;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -9,7 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-        super(output, theBeetrootMod.MOD_ID, exFileHelper);
+        super(output, TheBeetrootMod.MODID, exFileHelper);
     }
 
     @Override

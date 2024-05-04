@@ -1,6 +1,6 @@
 package net.jyu4.thebeetrootmod.datagen;
 
-import net.jyu4.thebeetrootmod.theBeetrootMod;
+import net.jyu4.thebeetrootmod.TheBeetrootMod;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -62,7 +62,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
             SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), pCategory, pResult,
                     pExperience, pCookingTime, pCookingSerializer)
                     .group(pGroup).unlockedBy(getHasName(itemlike), has(itemlike))
-                    .save(pFinishedRecipeConsumer,  theBeetrootMod.MOD_ID + ":" + getItemName(pResult) + pRecipeName + "_" + getItemName(itemlike));
+                    .save(pFinishedRecipeConsumer,  TheBeetrootMod.MODID + ":" + getItemName(pResult) + pRecipeName + "_" + getItemName(itemlike));
         }
     }
 }

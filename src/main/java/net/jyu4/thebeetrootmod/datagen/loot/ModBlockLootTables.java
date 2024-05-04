@@ -1,6 +1,6 @@
 package net.jyu4.thebeetrootmod.datagen.loot;
 
-import net.jyu4.thebeetrootmod.registry.ModBlocks;
+import net.jyu4.thebeetrootmod.block.ModBlocks;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;

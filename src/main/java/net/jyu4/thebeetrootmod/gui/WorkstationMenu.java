@@ -1,9 +1,8 @@
 package net.jyu4.thebeetrootmod.gui;
 
 import net.jyu4.thebeetrootmod.recipe.WorkstationRecipe;
-import net.jyu4.thebeetrootmod.registry.ModBlocks;
-import net.jyu4.thebeetrootmod.registry.ModMenuTypes;
-import net.jyu4.thebeetrootmod.registry.ModRecipeType;
+import net.jyu4.thebeetrootmod.block.ModBlocks;
+import net.jyu4.thebeetrootmod.recipe.ModRecipeType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

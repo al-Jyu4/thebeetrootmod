@@ -1,8 +1,6 @@
 package net.jyu4.thebeetrootmod.item;
 
-import net.jyu4.thebeetrootmod.Config;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.GlobalPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -15,8 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public class EchoBeetrootItem extends Item {
-    public EchoBeetrootItem(Properties pProperties) {
+public class ItemEchoBeetroot extends Item {
+    public ItemEchoBeetroot(Properties pProperties) {
         super(pProperties);
     }
 

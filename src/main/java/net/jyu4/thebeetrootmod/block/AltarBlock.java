@@ -1,7 +1,7 @@
 package net.jyu4.thebeetrootmod.block;
 
-import net.jyu4.thebeetrootmod.block.entity.AltarEntity;
-import net.jyu4.thebeetrootmod.registry.ModBlockEntities;
+import net.jyu4.thebeetrootmod.block.blockentity.AltarEntity;
+import net.jyu4.thebeetrootmod.block.blockentity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -52,7 +52,6 @@ public class AltarBlock extends BaseEntityBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, Boolean.valueOf(false)));
     }
 
-    @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
