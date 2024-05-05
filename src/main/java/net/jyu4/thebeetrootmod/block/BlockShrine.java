@@ -1,9 +1,14 @@
 package net.jyu4.thebeetrootmod.block;
 
+import net.jyu4.thebeetrootmod.gui.ShrineMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -18,13 +23,16 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class ShrineBlock extends Block {
+public class BlockShrine extends Block {
+
+    private static final Component CONTAINER_TITLE = Component.translatable("thebeetrootmod.workstation_crafting");
+
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     protected static final VoxelShape BASE1 = Block.box(0,0,0,16,2,16);
     protected static final VoxelShape BASE2 = box(1,2,1,15,6,15);
     protected static final VoxelShape SHAPE0 = Shapes.or(BASE1, BASE2);
 
-    public ShrineBlock(Properties pProperties) {
+    public BlockShrine(Properties pProperties) {
         super(pProperties);
     }
 
@@ -35,6 +43,10 @@ public class ShrineBlock extends Block {
             pPlayer.openMenu(pState.getMenuProvider(pLevel, pPos));
             return InteractionResult.CONSUME;
         }
+    }
+
+    public MenuProvider getMenuProvider(BlockState pState, Level pLevel, BlockPos pPos) {
+        return new SimpleMenuProvider((p_277304_, p_277305_, p_277306_) -> new ShrineMenu(p_277304_, p_277305_, ContainerLevelAccess.create(pLevel, pPos)), CONTAINER_TITLE);
     }
 
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {

@@ -1,7 +1,6 @@
 package net.jyu4.thebeetrootmod.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -15,7 +14,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class WellBlock extends Block {
+public class BlockWell extends Block {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     //protected static final VoxelShape BASE = Block.box(0,0,0,16,2,16);
     protected static final VoxelShape WELL = box(1,0,1,15,7,15);
@@ -23,7 +22,7 @@ public class WellBlock extends Block {
     //protected static final VoxelShape SHAPE0 = Shapes.or(BASE, Shapes.join(WELL, INSIDE, BooleanOp.ONLY_FIRST));
     protected static final VoxelShape SHAPE0 = Shapes.join(WELL, INSIDE, BooleanOp.ONLY_FIRST);
 
-    public WellBlock(Properties pProperties) {
+    public BlockWell(Properties pProperties) {
         super(pProperties);
     }
 

@@ -45,11 +45,11 @@ public class ModBlocks {
     public static final RegistryObject<Block> RUBY_BEETROOTS = BLOCKS.register("ruby_beetroots",() -> new RubyBeetroots(BlockBehaviour.Properties.copy(Blocks.BEETROOTS)));
 
     ///------------------------------///
-    public static final RegistryObject<Block> WORKSTATION = registerBlock("workstation",() -> new WorkstationBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final RegistryObject<Block> ALTAR = registerBlock("altar",() -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
-    public static final RegistryObject<Block> WELL = registerBlock("well",() -> new WellBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
-    public static final RegistryObject<Block> SHRINE = registerBlock("shrine",() -> new ShrineBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
-    public static final RegistryObject<Block> RITUAL_RING = registerBlock("ritual_ring",() -> new RitualRingBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
+    public static final RegistryObject<Block> WORKSTATION = registerBlock("workstation",() -> new BlockWorkstation(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> ALTAR = registerBlock("altar",() -> new BlockAltar(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
+    public static final RegistryObject<Block> WELL = registerBlock("well",() -> new BlockWell(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
+    public static final RegistryObject<Block> SHRINE = registerBlock("shrine",() -> new BlockShrine(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
+    public static final RegistryObject<Block> RITUAL_RING = registerBlock("ritual_ring",() -> new BlockRitualRing(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
 
     public static final RegistryObject<BlockResearchTable> Research_Table = BLOCK_REGISTER.register("research_table", () -> new BlockResearchTable(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
     ///------------------------------///

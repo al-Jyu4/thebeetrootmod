@@ -15,7 +15,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class RitualRingBlock extends Block {
+public class BlockRitualRing extends Block {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     protected static final VoxelShape BASE = Block.box(1,0,1,15,5,15);
     protected static final VoxelShape INSIDE = box(4.0D, 0.1D, 4.0D, 12.0D, 5.0D, 12.0D);
@@ -24,7 +24,7 @@ public class RitualRingBlock extends Block {
     protected static final VoxelShape FRONT2 = box(12.0D, 4.0D, 4.0D, 15.0D, 5.0D, 12.0D);
     protected static final VoxelShape FRONT3 = box(1.0D, 4.0D, 4.0D, 4.0D, 5.0D, 12.0D);
 
-    public RitualRingBlock(Properties pProperties) {
+    public BlockRitualRing(Properties pProperties) {
         super(pProperties);
     }
 

@@ -18,6 +18,14 @@ public class ModRecipeType {
                 }
             });
 
+    public static final RegistryObject<RecipeType<WorkstationRecipe>> ALTAR = RECIPE_TYPES.register("altar",
+            () -> new RecipeType<WorkstationRecipe>() {
+                @Override
+                public String toString() {
+                    return "altar";
+                }
+            });
+
     public static void register(IEventBus eventBus) {
         RECIPE_TYPES.register(eventBus);
     }

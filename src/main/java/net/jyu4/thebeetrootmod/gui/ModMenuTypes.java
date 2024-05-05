@@ -16,12 +16,12 @@ public class ModMenuTypes {
             DeferredRegister.create(ForgeRegistries.MENU_TYPES, TheBeetrootMod.MODID);
 
     public static final RegistryObject<MenuType<WorkstationMenu>> WORKSTATION = registerMenuType("thebeetrootmod.workstation", WorkstationMenu::new);
+    public static final RegistryObject<MenuType<ShrineMenu>> MENU_SHRINE = registerMenuType("thebeetrootmod.shrine", ShrineMenu::new);
     public static final RegistryObject<MenuType<AltarMenu>> ALTAR_MENU = registerMenuType("thebeetrootmod.altar", AltarMenu::new);
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }
-
     public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);
     }

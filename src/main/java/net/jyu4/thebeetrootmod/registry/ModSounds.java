@@ -1,5 +1,6 @@
-package net.jyu4.thebeetrootmod;
+package net.jyu4.thebeetrootmod.registry;
 
+import net.jyu4.thebeetrootmod.TheBeetrootMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;

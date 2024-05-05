@@ -1,9 +1,6 @@
 package net.jyu4.thebeetrootmod.block;
 
-import net.jyu4.thebeetrootmod.gui.BlockEntityContainerProvider;
-import net.jyu4.thebeetrootmod.gui.ContainerResearchTable;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -24,19 +21,11 @@ public class BlockResearchTable extends Block {
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-
-        if (!pPlayer.isShiftKeyDown()) {
-            if (pPlayer instanceof ServerPlayer) {
-                BlockEntityContainerProvider.openGui((ServerPlayer) pPlayer, station, (i, playerInventory, playerEntity) -> new ContainerResearchTable(i, station, playerInventory));
-            }
+        if (pLevel.isClientSide) {
             return InteractionResult.SUCCESS;
-        } /*else if (station.isOwner(pPlayer)) {
-            if (pPlayer instanceof ServerPlayer) {
-                BlockEntityContainerProvider.openGui((ServerPlayer) pPlayer, station, (i, playerInventory, playerEntity) -> new ContainerGasStationAdmin(i, station, playerInventory));
-            }
-            return InteractionResult.SUCCESS;
+        } else {
+            pPlayer.openMenu(pState.getMenuProvider(pLevel, pPos));
+            return InteractionResult.CONSUME;
         }
-        */
-        return InteractionResult.FAIL;
     }
 }

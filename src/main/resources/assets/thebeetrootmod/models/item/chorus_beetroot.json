@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "thebeetrootmod:item/end_beetroot"
+    "layer0": "thebeetrootmod:item/chorus_beetroot"
   }
 }

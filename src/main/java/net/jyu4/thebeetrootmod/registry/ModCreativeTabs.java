@@ -1,5 +1,6 @@
-package net.jyu4.thebeetrootmod;
+package net.jyu4.thebeetrootmod.registry;
 
+import net.jyu4.thebeetrootmod.TheBeetrootMod;
 import net.jyu4.thebeetrootmod.block.ModBlocks;
 import net.jyu4.thebeetrootmod.item.ModItems;
 import net.minecraft.core.registries.Registries;

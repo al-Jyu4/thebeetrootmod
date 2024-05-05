@@ -9,11 +9,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class ShrineScreen extends AbstractContainerScreen<AltarMenu> {
+public class ShrineScreen extends AbstractContainerScreen<ShrineMenu> {
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/base_gui.png");
 
-    public ShrineScreen(AltarMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+    public ShrineScreen(ShrineMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
 

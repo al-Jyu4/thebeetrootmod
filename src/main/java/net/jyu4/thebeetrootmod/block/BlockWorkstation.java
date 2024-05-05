@@ -15,19 +15,16 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class WorkstationBlock extends Block {
+public class BlockWorkstation extends Block {
     private static final Component CONTAINER_TITLE = Component.translatable("thebeetrootmod.workstation_crafting");
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;;
     protected static final VoxelShape X_LEGS;
@@ -48,7 +45,7 @@ public class WorkstationBlock extends Block {
     protected static final VoxelShape Z_SHAPE_LEG_3;
     protected static final VoxelShape Z_SHAPE_LEG_4;
 
-    public WorkstationBlock(Properties pProperties) {
+    public BlockWorkstation(Properties pProperties) {
         super(pProperties);
     }
 

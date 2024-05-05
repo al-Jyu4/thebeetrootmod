@@ -6,7 +6,9 @@ import net.jyu4.thebeetrootmod.gui.*;
 import net.jyu4.thebeetrootmod.item.ModItems;
 import net.jyu4.thebeetrootmod.recipe.ModRecipeType;
 import net.jyu4.thebeetrootmod.recipe.ModRecipes;
+import net.jyu4.thebeetrootmod.registry.ModCreativeTabs;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -18,6 +20,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.simple.SimpleChannel;
 import software.bernie.geckolib.GeckoLib;
+import net.minecraftforge.fml.config.ModConfig;
 
 @Mod(TheBeetrootMod.MODID)
 public class TheBeetrootMod
@@ -26,8 +29,7 @@ public class TheBeetrootMod
 
     public static SimpleChannel SIMPLE_CHANNEL;
 
-    public TheBeetrootMod()
-    {
+    public TheBeetrootMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ///------------------------------///
         ModBlocks.register(modEventBus);
@@ -45,7 +47,15 @@ public class TheBeetrootMod
         GeckoLib.initialize();
         ///------------------------------///
         MinecraftForge.EVENT_BUS.register(this);
-        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ModConfig.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfig.SPEC, "thebeetrootmod-config.toml");
+    }
+
+    public static ResourceLocation createRL(String path) {
+        return new ResourceLocation(MODID, path);
+    }
+
+    public static String createRLString(String path) {
+        return MODID + ":" + path;
     }
 
     @SubscribeEvent
@@ -60,6 +70,7 @@ public class TheBeetrootMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.WORKSTATION.get(), WorkstationScreen::new);
+            MenuScreens.register(ModMenuTypes.MENU_SHRINE.get(), ShrineScreen::new);
             MenuScreens.register(ModMenuTypes.ALTAR_MENU.get(), AltarScreen::new);
         }
     }

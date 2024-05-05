@@ -24,7 +24,6 @@ import javax.annotation.Nullable;
 public abstract class BlockEntityBase extends BlockEntity implements Nameable {
 
     private Component name;
-    private CompoundTag compoundLast;
 
     public BlockEntityBase(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
         super(tileEntityTypeIn, pos, state);

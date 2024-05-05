@@ -2,6 +2,7 @@ package net.jyu4.thebeetrootmod.recipe;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import net.jyu4.thebeetrootmod.gui.AltarTab;
 import net.jyu4.thebeetrootmod.item.ModItems;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -18,11 +19,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AltarRecipe implements Recipe<Container> {
-
+public class RecipeAltar implements Recipe<Container> {
     public static final byte DEFAULT_CRAFTING_COST_NUTRIENTS = 1;
     public static final int MAX_INGREDIENTS = 5;
     private final ResourceLocation registryKey;
+    private final AltarTab tab;
     private final List<IngredientStack> ingredients;
     private final ItemStack result;
 
@@ -30,8 +31,9 @@ public class AltarRecipe implements Recipe<Container> {
 
     private final int cost;
 
-    public AltarRecipe(ResourceLocation id, ItemStack result, List<IngredientStack> ingredients, int craftingCostNutrients) {
+    public RecipeAltar(ResourceLocation id, AltarTab tab, ItemStack result, List<IngredientStack> ingredients, int craftingCostNutrients) {
         registryKey = id;
+        this.tab = tab;
         this.result = result;
         this.ingredients = ingredients;
 
@@ -42,7 +44,7 @@ public class AltarRecipe implements Recipe<Container> {
         cost = craftingCostNutrients;
     }
 
-    public static boolean areRecipesEqual(AltarRecipe recipeA, AltarRecipe recipeB) {
+    public static boolean areRecipesEqual(RecipeAltar recipeA, RecipeAltar recipeB) {
         return recipeA.isRecipeEqual(recipeB);
     }
 
@@ -55,7 +57,7 @@ public class AltarRecipe implements Recipe<Container> {
         return cost;
     }
 
-    public boolean isRecipeEqual(AltarRecipe other) {
+    public boolean isRecipeEqual(RecipeAltar other) {
         return registryKey.equals(other.getId());
     }
 
@@ -115,14 +117,18 @@ public class AltarRecipe implements Recipe<Container> {
         return ingredients;
     }
 
+    public AltarTab getTab() {
+        return tab;
+    }
+
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return WorkstationRecipe.Serializer.INSTANCE;
+        return ModRecipes.BIO_FORGING_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return ModRecipeType.ALTAR.get();
+        return ModRecipes.BIO_FORGING_RECIPE_TYPE.get();
     }
 
     @Override
@@ -130,11 +136,10 @@ public class AltarRecipe implements Recipe<Container> {
         return new ItemStack(ModItems.GOLDEN_BEETROOT.get());
     }
 
-    public static class Serializer implements RecipeSerializer<AltarRecipe> {
-        public static final WorkstationRecipe.Serializer INSTANCE = new WorkstationRecipe.Serializer();
+    public static class Serializer implements RecipeSerializer<RecipeAltar> {
 
         @Override
-        public AltarRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+        public RecipeAltar fromJson(ResourceLocation recipeId, JsonObject json) {
             List<IngredientStack> ingredients = RecipeUtil.readIngredientStacks(GsonHelper.getAsJsonArray(json, "ingredients"));
 
             if (ingredients.isEmpty()) {
@@ -149,13 +154,14 @@ public class AltarRecipe implements Recipe<Container> {
 
             int cost = GsonHelper.getAsInt(json, "nutrientsCost", DEFAULT_CRAFTING_COST_NUTRIENTS);
 
+            AltarTab tab = AltarTab.fromJson(json);
 
-            return new AltarRecipe(recipeId, resultStack, ingredients, cost);
+            return new RecipeAltar(recipeId, tab, resultStack, ingredients, cost);
         }
 
         @Nullable
         @Override
-        public AltarRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+        public RecipeAltar fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             ItemStack resultStack = buffer.readItem();
 
             int ingredientCount = buffer.readVarInt();
@@ -166,11 +172,13 @@ public class AltarRecipe implements Recipe<Container> {
 
             int craftingCost = buffer.readVarInt();
 
-            return new AltarRecipe(recipeId, resultStack, ingredients, craftingCost);
+            AltarTab tab = AltarTab.fromNetwork(buffer);
+
+            return new RecipeAltar(recipeId, tab, resultStack, ingredients, craftingCost);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buffer, AltarRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, RecipeAltar recipe) {
             buffer.writeItem(recipe.result);
 
             buffer.writeVarInt(recipe.ingredients.size());
@@ -179,6 +187,8 @@ public class AltarRecipe implements Recipe<Container> {
             }
 
             buffer.writeVarInt(recipe.getCraftingCostNutrients());
+
+            recipe.tab.toNetwork(buffer);
         }
 
     }

@@ -29,8 +29,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.UUID;
 
-public class AltarEntity extends BlockEntity implements MenuProvider {
+public class BlockEntityAltar extends BlockEntity implements MenuProvider {
     private static final Component CONTAINER_TITLE = Component.translatable("block.thebeetrootmod.altar");
     private final ItemStackHandler itemHandler = new ItemStackHandler(8);
 
@@ -50,14 +51,17 @@ public class AltarEntity extends BlockEntity implements MenuProvider {
     private int progress = 0;
     private int maxProgress = 78;
 
-    public AltarEntity(BlockPos pPos, BlockState pBlockState) {
+    private UUID owner;
+
+    public BlockEntityAltar(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.ALTAR_BE.get(), pPos, pBlockState);
+        this.owner = new UUID(0L, 0L);
         this.data = new ContainerData() {
             @Override
             public int get(int pIndex) {
                 return switch (pIndex) {
-                    case 0 -> AltarEntity.this.progress;
-                    case 1 -> AltarEntity.this.maxProgress;
+                    case 0 -> BlockEntityAltar.this.progress;
+                    case 1 -> BlockEntityAltar.this.maxProgress;
                     default -> 0;
                 };
             }
@@ -65,8 +69,8 @@ public class AltarEntity extends BlockEntity implements MenuProvider {
             @Override
             public void set(int pIndex, int pValue) {
                 switch (pIndex) {
-                    case 0 -> AltarEntity.this.progress = pValue;
-                    case 1 -> AltarEntity.this.maxProgress = pValue;
+                    case 0 -> BlockEntityAltar.this.progress = pValue;
+                    case 1 -> BlockEntityAltar.this.maxProgress = pValue;
                 }
             }
 
@@ -84,6 +88,20 @@ public class AltarEntity extends BlockEntity implements MenuProvider {
         }
 
         return super.getCapability(cap, side);
+    }
+
+    public void setOwner(UUID owner) {
+        this.owner = owner;
+        setChanged();
+    }
+
+    public void setOwner(Player player) {
+        this.owner = new UUID(player.getUUID().getMostSignificantBits(), player.getUUID().getLeastSignificantBits());
+        setChanged();
+    }
+
+    public boolean isOwner(Player player) {
+        return player.getUUID().equals(owner);
     }
 
     @Override
@@ -121,6 +139,7 @@ public class AltarEntity extends BlockEntity implements MenuProvider {
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
         pTag.putInt("thebeetrootmod.altar.progress", progress);
+        pTag.putUUID("owner", owner);
 
         super.saveAdditional(pTag);
     }
@@ -130,8 +149,13 @@ public class AltarEntity extends BlockEntity implements MenuProvider {
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
         progress = pTag.getInt("thebeetrootmod.altar.progress");
+        if (pTag.contains("owner")) {
+            owner = pTag.getUUID("owner");
+        } else {
+            owner = new UUID(0L, 0L);
+        }
     }
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, AltarEntity pBlockEntity) {
+    public void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntityAltar pBlockEntity) {
         if(hasRecipe() && this.progress == 0) {
             consumeOfferings();
         }

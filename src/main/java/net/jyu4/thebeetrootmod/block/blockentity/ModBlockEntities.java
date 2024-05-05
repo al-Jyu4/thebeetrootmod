@@ -12,7 +12,7 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, TheBeetrootMod.MODID);
     ///------------------------------///
-    public static final RegistryObject<BlockEntityType<AltarEntity>> ALTAR_BE = BLOCK_ENTITIES.register("altar_be", () -> BlockEntityType.Builder.of(AltarEntity::new, ModBlocks.ALTAR.get()).build(null));
+    public static final RegistryObject<BlockEntityType<BlockEntityAltar>> ALTAR_BE = BLOCK_ENTITIES.register("altar_be", () -> BlockEntityType.Builder.of(BlockEntityAltar::new, ModBlocks.ALTAR.get()).build(null));
     ///------------------------------///
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
