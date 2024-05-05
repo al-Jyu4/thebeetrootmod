@@ -2,7 +2,9 @@ package net.jyu4.thebeetrootmod.gui;
 
 import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltar;
 import net.jyu4.thebeetrootmod.block.ModBlocks;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -13,12 +15,33 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class AltarMenu extends AbstractContainerMenu {
+
     public final BlockEntityAltar blockEntity;
     private final Level level;
     private final ContainerData data;
 
+    private Button buttonSpawn;
+
     public AltarMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(8));
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+
+        buttonSpawn = addRenderableWidget(Button.builder(Component.translatable("button.car.spawn_car"), button -> {
+            if (tile.getLevel().isClientSide) {
+                if (tile.isCurrentCraftingCarValid()) {
+                    PacketDistributor.sendToServer(new MessageSpawnCar(tile.getBlockPos()));
+                } else {
+                    for (Component message : tile.getMessages()) {
+                        player.sendSystemMessage(message);
+                    }
+                }
+            }
+        }).bounds(leftPos + 105, topPos + 106, 60, 20).build());
+        buttonSpawn.active = false;
     }
 
     public AltarMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
