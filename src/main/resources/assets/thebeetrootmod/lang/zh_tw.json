@@ -3,8 +3,11 @@
   "tab.thebeetrootmod.beetroot_machinery": "甜菜模組",
 
   "block.thebeetrootmod.workstation": "作業台",
+
   "block.thebeetrootmod.altar": "祭壇",
   "block.thebeetrootmod.altar.not_owned": "這不是你的祭壇！",
+  "button.thebeetrootmod.pray": "祈禱",
+
   "block.thebeetrootmod.well": "水井",
   "block.thebeetrootmod.shrine": "神壇",
   "block.thebeetrootmod.ritual_ring": "儀式環",

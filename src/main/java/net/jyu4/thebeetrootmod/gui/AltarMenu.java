@@ -26,24 +26,6 @@ public class AltarMenu extends AbstractContainerMenu {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(8));
     }
 
-    @Override
-    protected void init() {
-        super.init();
-
-        buttonSpawn = addRenderableWidget(Button.builder(Component.translatable("button.car.spawn_car"), button -> {
-            if (tile.getLevel().isClientSide) {
-                if (tile.isCurrentCraftingCarValid()) {
-                    PacketDistributor.sendToServer(new MessageSpawnCar(tile.getBlockPos()));
-                } else {
-                    for (Component message : tile.getMessages()) {
-                        player.sendSystemMessage(message);
-                    }
-                }
-            }
-        }).bounds(leftPos + 105, topPos + 106, 60, 20).build());
-        buttonSpawn.active = false;
-    }
-
     public AltarMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.ALTAR_MENU.get(), pContainerId);
         checkContainerSize(inv, 8);
@@ -55,14 +37,10 @@ public class AltarMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 62, 11));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 11));
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 98, 11));
-            this.addSlot(new SlotItemHandler(iItemHandler, 3, 44, 48));
-            this.addSlot(new SlotItemHandler(iItemHandler, 4, 62, 48));
-            this.addSlot(new SlotItemHandler(iItemHandler, 5, 80, 48));
-            this.addSlot(new SlotItemHandler(iItemHandler, 6, 98, 48));
-            this.addSlot(new SlotItemHandler(iItemHandler, 7, 116, 48));
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 35, 17));
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 35, 35));
+            this.addSlot(new SlotItemHandler(iItemHandler, 2, 35, 53));
+            this.addSlot(new SlotItemHandler(iItemHandler, 3, 80, 35));
         });
 
         addDataSlots(data);

@@ -122,7 +122,12 @@ public class AltarRecipe implements Recipe<Container> {
 
     @Override
     public RecipeType<?> getType() {
-        return ModRecipeType.ALTAR.get();
+        return Type.INSTANCE;
+    }
+
+    public static class Type implements RecipeType<AltarRecipe> {
+        public static final Type INSTANCE = new Type();
+        public static final String ID = "altar";
     }
 
     @Override
@@ -131,7 +136,7 @@ public class AltarRecipe implements Recipe<Container> {
     }
 
     public static class Serializer implements RecipeSerializer<AltarRecipe> {
-        public static final WorkstationRecipe.Serializer INSTANCE = new WorkstationRecipe.Serializer();
+        public static final Serializer INSTANCE = new Serializer();
 
         @Override
         public AltarRecipe fromJson(ResourceLocation recipeId, JsonObject json) {

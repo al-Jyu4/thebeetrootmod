@@ -2,7 +2,9 @@ package net.jyu4.thebeetrootmod.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.jyu4.thebeetrootmod.TheBeetrootMod;
+import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltar;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -10,11 +12,25 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
-    private static final ResourceLocation TEXTURE =
-            new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/altar_gui.png");
+
+    private BlockEntityAltar be;
+    private Button buttonSpawn;
+
+    private static final ResourceLocation TEXTURE = new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/altar_gui1.png");
+
 
     public AltarScreen(AltarMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
+    }
+
+
+    @Override
+    protected void init() {
+        super.init();
+
+        buttonSpawn = addRenderableWidget(Button.builder(Component.translatable("button.thebeetrootmod.pray"), button -> {
+
+        }).bounds(leftPos + 115, topPos + 34, 54, 19).build());
     }
 
     @Override
@@ -41,5 +57,6 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
+
     }
 }

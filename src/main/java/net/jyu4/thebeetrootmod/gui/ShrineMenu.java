@@ -17,15 +17,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ShrineMenu extends ItemCombinerMenu {
-    public static final int INGREDIENT_1 = 0;
-    public static final int INGREDIENT_2 = 1;
-    public static final int INGREDIENT_3 = 2;
-    public static final int INGREDIENT_4 = 3;
-
-    public static final int RESULT_SLOT = 4;
-
-    public static final int BASE_SLOT = 1;
-    public static final int ADDITIONAL_SLOT = 2;
 
     private final Level level;
     @Nullable
@@ -60,6 +51,7 @@ public class ShrineMenu extends ItemCombinerMenu {
 
         this.access.execute((p_40263_, p_40264_) -> p_40263_.levelEvent(1044, p_40264_, 0));
     }
+
     private List<ItemStack> getRelevantItems() {
         return List.of(this.inputSlots.getItem(0),
                 this.inputSlots.getItem(1),

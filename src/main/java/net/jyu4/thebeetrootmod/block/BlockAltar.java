@@ -37,7 +37,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockAltar extends BaseEntityBlock {
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;;
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     protected static final VoxelShape X_SHAPE_ALTAR = Block.box(3.0, 3.0, 1.0, 13.0, 9.0, 15.0);;
     protected static final VoxelShape Z_SHAPE_ALTAR = Block.box(1.0, 3.0, 3.0, 15.0, 9.0, 13.0);;
