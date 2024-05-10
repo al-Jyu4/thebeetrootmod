@@ -23,8 +23,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class BlockRepairStation extends BlockBase implements EntityBlock {
 
-    private static final Component CONTAINER_TITLE = Component.translatable("block.beetrootmod.repair_station");
-
     protected static final VoxelShape X_SHAPE_TABLE = Block.box(2.0, 5.0, 0.0, 14.0, 8.0, 16.0);
     protected static final VoxelShape Z_SHAPE_TABLE = Block.box(0.0, 5.0, 2.0, 16.0, 8.0, 14.0);
 

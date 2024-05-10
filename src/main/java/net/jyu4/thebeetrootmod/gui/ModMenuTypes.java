@@ -18,7 +18,7 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<WorkstationMenu>> WORKSTATION = registerMenuType("thebeetrootmod.workstation", WorkstationMenu::new);
     public static final RegistryObject<MenuType<ShrineMenu>> MENU_SHRINE = registerMenuType("thebeetrootmod.shrine", ShrineMenu::new);
     public static final RegistryObject<MenuType<AltarMenu>> ALTAR_MENU = registerMenuType("thebeetrootmod.altar", AltarMenu::new);
-    public static final RegistryObject<MenuType<MenuRepairStation>> REPAIR_STATION_MENU = registerMenuType("gui.beetrootmod.repair_station_menu", MenuRepairStation::new);
+    public static final RegistryObject<MenuType<RepairStationMenu>> REPAIR_STATION_MENU = registerMenuType("gui.beetrootmod.repair_station_menu", RepairStationMenu::new);
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));

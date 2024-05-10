@@ -1,7 +1,7 @@
 package net.jyu4.thebeetrootmod.block.blockentity;
 
 import net.jyu4.thebeetrootmod.ModUtils;
-import net.jyu4.thebeetrootmod.gui.MenuRepairStation;
+import net.jyu4.thebeetrootmod.gui.RepairStationMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class BlockEntityRepairStation extends BlockEntityBase implements MenuProvider {
 
-    private static final Component CONTAINER_TITLE = Component.translatable("block.beetrootmod.repair_station");
+    private static final Component CONTAINER_TITLE = Component.translatable("block.thebeetrootmod.repair_station");
     private final ItemStackHandler itemHandler = new ItemStackHandler(1);
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     protected final ContainerData data;
@@ -123,7 +123,7 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-        return new MenuRepairStation(pContainerId, pPlayerInventory, this, this.data);
+        return new RepairStationMenu(pContainerId, pPlayerInventory, this, this.data);
     }
 
     @Override

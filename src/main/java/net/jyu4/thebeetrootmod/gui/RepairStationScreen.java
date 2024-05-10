@@ -7,26 +7,36 @@ import net.jyu4.thebeetrootmod.net.MessageRepairItem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.CyclingSlotBackground;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.simple.SimpleChannel;
 
-public class ScreenRepairStation extends AbstractContainerScreen<MenuRepairStation> {
+import java.util.List;
+import java.util.Optional;
+
+public class RepairStationScreen extends AbstractContainerScreen<RepairStationMenu> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/gui_repair_station.png");
 
     private BlockEntityRepairStation be;
     private Player player;
 
+    private final CyclingSlotBackground slotIcon = new CyclingSlotBackground(0);
+    private static final ResourceLocation BEETROOT = new ResourceLocation("item/empty_slot_smithing_template_armor_trim");
+    private static final ResourceLocation TOOLS = new ResourceLocation("item/empty_slot_smithing_template_netherite_upgrade");
+    private static final Component TOOLTIP = Component.translatable("thebeetrootmod.workstation.error_tooltip");
+    private static final List<ResourceLocation> EMPTY_SLOT_SMITHING_TEMPLATES = List.of(BEETROOT, TOOLS);
 
     Button repairButton;
     private int leftPos, topPos;
 
 
-    public ScreenRepairStation(MenuRepairStation pMenu, Inventory pPlayerInventory, Component pTitle) {
+    public RepairStationScreen(RepairStationMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
         this.be = pMenu.getTile();
         this.player = pPlayerInventory.player;
@@ -46,8 +56,9 @@ public class ScreenRepairStation extends AbstractContainerScreen<MenuRepairStati
 
     }
 
-    private void handleRepairButton(Button button){
-
+    public void containerTick() {
+        super.containerTick();
+        this.slotIcon.tick(EMPTY_SLOT_SMITHING_TEMPLATES);
     }
 
     @Override
@@ -61,6 +72,7 @@ public class ScreenRepairStation extends AbstractContainerScreen<MenuRepairStati
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
         //renderProgressArrow(guiGraphics, x, y);
+        this.renderOnboardingTooltips(guiGraphics, pMouseX, pMouseY);
     }
 
     @Override
@@ -69,5 +81,15 @@ public class ScreenRepairStation extends AbstractContainerScreen<MenuRepairStati
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 
+    }
+
+    private void renderOnboardingTooltips(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
+        Optional<Component> optional = Optional.empty();
+        if (this.hoveredSlot != null && this.hoveredSlot.index == 0) {
+            optional = Optional.of(TOOLTIP);
+        }
+        optional.ifPresent((p_280863_) -> {
+            pGuiGraphics.renderTooltip(this.font, this.font.split(p_280863_, 115), pMouseX, pMouseY);
+        });
     }
 }

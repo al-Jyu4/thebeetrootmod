@@ -33,27 +33,26 @@ public class ItemEchoBeetroot extends ItemBase{
     }
 
     private ItemStack mainHand(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
-        if (!(pLivingEntity instanceof ServerPlayer player) || pLevel.isClientSide() && player.getCommandSenderWorld().dimension() != Level.OVERWORLD) return pStack;
+        if (!(pLivingEntity instanceof ServerPlayer player) || pLevel.isClientSide()) return pStack;
 
         BlockPos blockPos = player.getRespawnPosition();
         ResourceKey<Level> spawnDimension = player.getRespawnDimension();
+        ServerLevel spawnLevel = player.getServer().getLevel(spawnDimension);
 
         if (blockPos == null || spawnDimension == null) {
             ModUtils.displayMessage(player, "toast.beetrootmod.echo_beetroot.no_spawn");
             return pStack;
         }
 
-        ServerLevel spawnLevelGeneric = player.getServer().getLevel(spawnDimension);
-        if (spawnLevelGeneric != null) {
-            ServerLevel spawnLevel = spawnLevelGeneric;
-
-            if (spawnLevel != pLevel) {
-                player.changeDimension(spawnLevel);
-            }
-            performTeleportation(player, blockPos);
-            ModUtils.displayMessage(player, "toast.beetrootmod.echo_beetroot.teleport_spawn");
-
+        if (spawnLevel != pLevel) {
+            //player.changeDimension(spawnLevel);
+            ModUtils.displayMessage(player, "toast.beetrootmod.echo_beetroot.dimension_error");
+            return pStack;
         }
+
+        if (player.isPassenger()) {player.stopRiding();}
+        performTeleportation(player, blockPos);
+        ModUtils.displayMessage(player, "toast.beetrootmod.echo_beetroot.teleport_spawn");
 
         return pStack;
     }
@@ -65,7 +64,6 @@ public class ItemEchoBeetroot extends ItemBase{
             if (player.isPassenger()) {player.stopRiding();}
 
             if (pLevel.dimension().location().equals(globalPos.dimension().location())) {
-
                 performTeleportation(player, globalPos.pos());
                 ModUtils.displayMessage(player, "toast.beetrootmod.echo_beetroot.teleport_death");
             } else {

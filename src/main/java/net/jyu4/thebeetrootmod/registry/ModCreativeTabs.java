@@ -21,7 +21,7 @@ public class ModCreativeTabs {
                     .title(Component.translatable("tab.thebeetrootmod.beetroot_ingredients"))
                     .displayItems((pParameters, pOutput) -> {
                         ///------------------------------///
-                        pOutput.accept(ModBlocks.WORKSTATION.get());
+                        pOutput.accept(ModBlocks.REPAIR_STATION.get());
                         pOutput.accept(Items.BEETROOT_SEEDS);
                         pOutput.accept(Items.BEETROOT);
                         pOutput.accept(ModItems.CANDY_BEETROOT_SEEDS.get());

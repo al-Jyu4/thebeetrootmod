@@ -1,6 +1,6 @@
 package net.jyu4.thebeetrootmod.block;
 
-import net.jyu4.thebeetrootmod.ModMethod;
+import net.jyu4.thebeetrootmod.ModUtils;
 import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltar;
 import net.jyu4.thebeetrootmod.block.blockentity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -67,7 +67,7 @@ public class BlockAltar extends BaseEntityBlock {
 
         BlockEntityAltar altar = (BlockEntityAltar) be;
         if (!altar.isOwner(pPlayer)) {
-            ModMethod.displayMessage(pPlayer, "block.thebeetrootmod.altar.not_owned");
+            ModUtils.displayMessage(pPlayer, "block.thebeetrootmod.altar.not_owned");
             pLevel.playSound(null, pPos.getX(), pPos.getY(), pPos.getZ(), SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 1.0F, 1.0F);
             return InteractionResult.sidedSuccess(false);
         }

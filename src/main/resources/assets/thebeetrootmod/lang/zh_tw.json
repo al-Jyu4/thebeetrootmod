@@ -2,11 +2,29 @@
   "tab.thebeetrootmod.beetroot_ingredients": "甜菜模組",
   "tab.thebeetrootmod.beetroot_machinery": "甜菜模組",
 
-  "block.thebeetrootmod.workstation": "作業台",
+  "block.thebeetrootmod.repair_station": "修理台",
+  "button.thebeetrootmod.repair": "修理",
 
   "block.thebeetrootmod.altar": "祭壇",
-  "block.thebeetrootmod.altar.not_owned": "這不是你的祭壇！",
-  "button.thebeetrootmod.pray": "祈禱",
+
+  "block.thebeetrootmod.echo_beetroots": "回音甜菜",
+  "item.thebeetrootmod.echo_beetroot": "回音甜菜",
+  "item.thebeetrootmod.echo_beetroot_seeds": "回音甜菜種子",
+  "toast.beetrootmod.echo_beetroot.no_spawn": "沒有重生點",
+  "toast.beetrootmod.echo_beetroot.dimension_error": "重生點不在同一個世界",
+  "toast.beetrootmod.echo_beetroot.teleport_spawn": "已傳送到重生點",
+
+  "block.thebeetrootmod.chorus_beetroots": "歌萊甜菜",
+  "item.thebeetrootmod.chorus_beetroot": "歌萊甜菜",
+  "item.thebeetrootmod.chorus_beetroot_seeds": "歌萊甜菜種子",
+
+
+
+
+
+
+
+
 
   "block.thebeetrootmod.well": "水井",
   "block.thebeetrootmod.shrine": "神壇",
@@ -36,10 +54,6 @@
   "item.thebeetrootmod.sugar_beet": "糖用甜菜",
   "item.thebeetrootmod.sugar_beet_seeds": "糖用甜菜種子",
 
-  "block.thebeetrootmod.echo_beetroots": "回音甜菜",
-  "item.thebeetrootmod.echo_beetroot": "回音甜菜",
-  "item.thebeetrootmod.echo_beetroot_seeds": "回音甜菜種子",
-
   "block.thebeetrootmod.missing_beetroots": "缺失甜菜",
   "item.thebeetrootmod.missing_beetroot": "缺失甜菜",
   "item.thebeetrootmod.missing_beetroot_seeds": "缺失甜菜種子",
@@ -48,9 +62,7 @@
   "item.thebeetrootmod.nether_beetroot": "煉獄甜菜",
   "item.thebeetrootmod.nether_beetroot_seeds": "煉獄甜菜種子",
 
-  "block.thebeetrootmod.end_beetroots": "歌萊甜菜",
-  "item.thebeetrootmod.end_beetroot": "歌萊甜菜",
-  "item.thebeetrootmod.end_beetroot_seeds": "歌萊甜菜種子",
+
 
   "block.thebeetrootmod.amethyst_beetroots": "紫水晶甜菜",
   "item.thebeetrootmod.amethyst_beetroot": "紫水晶甜菜",

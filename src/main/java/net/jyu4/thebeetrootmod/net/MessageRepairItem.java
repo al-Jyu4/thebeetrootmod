@@ -1,5 +1,6 @@
 package net.jyu4.thebeetrootmod.net;
 
+import net.jyu4.thebeetrootmod.TheBeetrootMod;
 import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityRepairStation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -34,7 +35,7 @@ public class MessageRepairItem implements Message<MessageRepairItem> {
     @Override
     public void executeServerSide(NetworkEvent.Context context) {
         if (!context.getSender().getUUID().equals(uuid)) {
-            BeetrootMod.LOGGER.error("The UUID of the sender was not equal to the packet UUID");
+            TheBeetrootMod.LOGGER.error("The UUID of the sender was not equal to the packet UUID");
             return;
         }
 

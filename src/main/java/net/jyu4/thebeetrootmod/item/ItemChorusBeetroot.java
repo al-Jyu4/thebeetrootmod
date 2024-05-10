@@ -22,7 +22,8 @@ public class ItemChorusBeetroot extends ItemBase{
     public @NotNull ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity livingEntity) {
         if (!(livingEntity instanceof ServerPlayer player) || pLevel.isClientSide()) return pStack;
 
-        final double maxDistance = Config.teleport_range;
+        //final double maxDistance = Config.teleport_range;
+        final double maxDistance = 80;
 
         HitResult hitResult = wherePlayerLookingAt(pLevel, player, ClipContext.Fluid.NONE, maxDistance);
 

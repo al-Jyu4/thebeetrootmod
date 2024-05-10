@@ -12,17 +12,17 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class MenuRepairStation extends AbstractContainerMenu {
+public class RepairStationMenu extends AbstractContainerMenu {
 
     public final BlockEntityRepairStation blockEntity;
     private final Level level;
     private final ContainerData data;
 
-    public MenuRepairStation(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+    public RepairStationMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(8));
     }
 
-    public MenuRepairStation(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
+    public RepairStationMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.REPAIR_STATION_MENU.get(), pContainerId);
         checkContainerSize(inv, 1);
         blockEntity = ((BlockEntityRepairStation) entity);

@@ -1,5 +1,6 @@
 package net.jyu4.thebeetrootmod;
 
+import com.mojang.logging.LogUtils;
 import net.jyu4.thebeetrootmod.net.Message;
 import net.jyu4.thebeetrootmod.net.MessageRepairItem;
 import net.jyu4.thebeetrootmod.block.ModBlocks;
@@ -24,6 +25,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
+import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;
 import net.minecraftforge.fml.config.ModConfig;
 
@@ -31,6 +33,7 @@ import net.minecraftforge.fml.config.ModConfig;
 public class TheBeetrootMod
 {
     public static final String MODID = "thebeetrootmod";
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public TheBeetrootMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -75,7 +78,7 @@ public class TheBeetrootMod
             MenuScreens.register(ModMenuTypes.WORKSTATION.get(), WorkstationScreen::new);
             MenuScreens.register(ModMenuTypes.MENU_SHRINE.get(), ShrineScreen::new);
             MenuScreens.register(ModMenuTypes.ALTAR_MENU.get(), AltarScreen::new);
-            MenuScreens.register(ModMenuTypes.REPAIR_STATION_MENU.get(), ScreenRepairStation::new);
+            MenuScreens.register(ModMenuTypes.REPAIR_STATION_MENU.get(), RepairStationScreen::new);
         }
     }
 
