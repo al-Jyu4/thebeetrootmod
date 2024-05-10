@@ -1,5 +1,7 @@
 package net.jyu4.thebeetrootmod;
 
+import net.jyu4.thebeetrootmod.net.Message;
+import net.jyu4.thebeetrootmod.net.MessageRepairItem;
 import net.jyu4.thebeetrootmod.block.ModBlocks;
 import net.jyu4.thebeetrootmod.block.blockentity.ModBlockEntities;
 import net.jyu4.thebeetrootmod.gui.*;
@@ -17,7 +19,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import software.bernie.geckolib.GeckoLib;
 import net.minecraftforge.fml.config.ModConfig;
@@ -27,10 +32,9 @@ public class TheBeetrootMod
 {
     public static final String MODID = "thebeetrootmod";
 
-    public static SimpleChannel SIMPLE_CHANNEL;
-
     public TheBeetrootMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
         ///------------------------------///
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
@@ -42,12 +46,11 @@ public class TheBeetrootMod
         ModMenuTypes.register(modEventBus);
 
         ModCreativeTabs.register(modEventBus);
-        //MachineryTab.register(modEventBus);
 
         GeckoLib.initialize();
         ///------------------------------///
         MinecraftForge.EVENT_BUS.register(this);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfig.SPEC, "thebeetrootmod-config.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     public static ResourceLocation createRL(String path) {
@@ -72,6 +75,46 @@ public class TheBeetrootMod
             MenuScreens.register(ModMenuTypes.WORKSTATION.get(), WorkstationScreen::new);
             MenuScreens.register(ModMenuTypes.MENU_SHRINE.get(), ShrineScreen::new);
             MenuScreens.register(ModMenuTypes.ALTAR_MENU.get(), AltarScreen::new);
+            MenuScreens.register(ModMenuTypes.REPAIR_STATION_MENU.get(), ScreenRepairStation::new);
         }
+    }
+
+    public static SimpleChannel SIMPLE_CHANNEL;
+
+    @SubscribeEvent
+    public void commonSetup(FMLCommonSetupEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
+
+        SIMPLE_CHANNEL = registerChannel(TheBeetrootMod.MODID, "default");
+        registerMessage(SIMPLE_CHANNEL, 0, MessageRepairItem.class);
+    }
+
+    public static SimpleChannel registerChannel(String modId, String name) {
+        return NetworkRegistry.newSimpleChannel(new ResourceLocation(modId, name), () -> "1.0.0", s -> true, s -> true);
+    }
+
+
+    public static <T extends Message<?>> void registerMessage(SimpleChannel channel, int id, Class<T> message) {
+        channel.registerMessage(id, (Class) message, Message::toBytes, (buf) -> {
+            try {
+                Message<?> msg = message.getDeclaredConstructor().newInstance();
+                return msg.fromBytes(buf);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }, (msg, fun) -> {
+            NetworkEvent.Context context = fun.get();
+            if (msg.getExecutingSide().equals(Dist.CLIENT)) {
+                context.enqueueWork(() -> {
+                    msg.executeClientSide(context);
+                    context.setPacketHandled(true);
+                });
+            } else if (msg.getExecutingSide().equals(Dist.DEDICATED_SERVER)) {
+                context.enqueueWork(() -> {
+                    msg.executeServerSide(context);
+                    context.setPacketHandled(true);
+                });
+            }
+        });
     }
 }

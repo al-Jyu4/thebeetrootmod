@@ -50,8 +50,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WELL = registerBlock("well",() -> new BlockWell(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
     public static final RegistryObject<Block> SHRINE = registerBlock("shrine",() -> new BlockShrine(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
     public static final RegistryObject<Block> RITUAL_RING = registerBlock("ritual_ring",() -> new BlockRitualRing(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
-
-    public static final RegistryObject<BlockResearchTable> Research_Table = BLOCK_REGISTER.register("research_table", () -> new BlockResearchTable(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
+    public static final RegistryObject<Block> REPAIR_STATION = registerBlock("repair_station",() -> new BlockRepairStation(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD).ignitedByLava()));
     ///------------------------------///
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

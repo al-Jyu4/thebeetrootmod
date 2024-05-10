@@ -2,7 +2,8 @@ package net.jyu4.thebeetrootmod.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.jyu4.thebeetrootmod.TheBeetrootMod;
-import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltar;
+import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityRepairStation;
+import net.jyu4.thebeetrootmod.net.MessageRepairItem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -10,26 +11,43 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.network.simple.SimpleChannel;
 
-public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
+public class ScreenRepairStation extends AbstractContainerScreen<MenuRepairStation> {
 
-    private BlockEntityAltar be;
+    private static final ResourceLocation TEXTURE = new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/gui_repair_station.png");
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/repair_station_gui.png");
+    private BlockEntityRepairStation be;
+    private Player player;
 
 
-    public AltarScreen(AltarMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+    Button repairButton;
+    private int leftPos, topPos;
+
+
+    public ScreenRepairStation(MenuRepairStation pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
+        this.be = pMenu.getTile();
+        this.player = pPlayerInventory.player;
     }
-
 
     @Override
     protected void init() {
         super.init();
 
-        Button buttonSpawn = addRenderableWidget(Button.builder(Component.translatable("button.thebeetrootmod.pray"), button -> {
+        this.leftPos = (this.width - this.imageWidth) /2;
+        this.topPos = (this.height - this.imageHeight) /2;
 
+        this.repairButton = addRenderableWidget(Button.builder(Component.translatable("button.thebeetrootmod.repair"), button -> {
+            SimpleChannel channel = TheBeetrootMod.SIMPLE_CHANNEL; // Your network channel
+            TheBeetrootMod.SIMPLE_CHANNEL.sendToServer(new MessageRepairItem(be.getBlockPos(), player, true));
         }).bounds(leftPos + 115, topPos + 34, 54, 19).build());
+
+    }
+
+    private void handleRepairButton(Button button){
+
     }
 
     @Override

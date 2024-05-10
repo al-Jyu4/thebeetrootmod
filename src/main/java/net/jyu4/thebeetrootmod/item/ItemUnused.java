@@ -1,5 +1,6 @@
 package net.jyu4.thebeetrootmod.item;
 
+import net.jyu4.thebeetrootmod.ModUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -18,11 +19,11 @@ public class ItemUnused extends Item {
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, components, tooltipFlag);
-        components.add(Component.translatable("desc.beetrootmod.unused").withStyle(ChatFormatting.GRAY));
+        ModUtils.translatable(components, "desc.beetrootmod.unused",ChatFormatting.GRAY);
 
     /*
     if (Config.UNUSED_TOOLTIP.get()) {
-        components.add(Component.translatable("desc.beetrootmod.unused").withStyle(ChatFormatting.GRAY));
+        ModUtils.translatable(components, "desc.beetrootmod.unused",ChatFormatting.GRAY);
     }
 
      */

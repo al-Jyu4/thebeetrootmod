@@ -1,5 +1,6 @@
 package net.jyu4.thebeetrootmod.item;
 
+import net.jyu4.thebeetrootmod.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,7 +22,7 @@ public class ItemChorusBeetroot extends ItemBase{
     public @NotNull ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity livingEntity) {
         if (!(livingEntity instanceof ServerPlayer player) || pLevel.isClientSide()) return pStack;
 
-        final double maxDistance = 80.0;
+        final double maxDistance = Config.teleport_range;
 
         HitResult hitResult = wherePlayerLookingAt(pLevel, player, ClipContext.Fluid.NONE, maxDistance);
 

@@ -155,6 +155,7 @@ public class BlockEntityAltar extends BlockEntity implements MenuProvider {
             owner = new UUID(0L, 0L);
         }
     }
+
     public void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntityAltar pBlockEntity) {
         if(hasRecipe() && this.progress == 0) {
             consumeOfferings();

@@ -1,5 +1,6 @@
 package net.jyu4.thebeetrootmod.item;
 
+import net.jyu4.thebeetrootmod.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -38,7 +39,7 @@ public class ItemEchoBeetroot extends ItemBase{
         ResourceKey<Level> spawnDimension = player.getRespawnDimension();
 
         if (blockPos == null || spawnDimension == null) {
-            displayMessage(player, "toast.beetrootmod.echo_beetroot.no_spawn");
+            ModUtils.displayMessage(player, "toast.beetrootmod.echo_beetroot.no_spawn");
             return pStack;
         }
 
@@ -50,7 +51,7 @@ public class ItemEchoBeetroot extends ItemBase{
                 player.changeDimension(spawnLevel);
             }
             performTeleportation(player, blockPos);
-            displayMessage(player, "toast.beetrootmod.echo_beetroot.teleport_spawn");
+            ModUtils.displayMessage(player, "toast.beetrootmod.echo_beetroot.teleport_spawn");
 
         }
 
@@ -66,9 +67,9 @@ public class ItemEchoBeetroot extends ItemBase{
             if (pLevel.dimension().location().equals(globalPos.dimension().location())) {
 
                 performTeleportation(player, globalPos.pos());
-                displayMessage(player, "toast.beetrootmod.echo_beetroot.teleport_death");
+                ModUtils.displayMessage(player, "toast.beetrootmod.echo_beetroot.teleport_death");
             } else {
-                displayMessage(player, "toast.beetrootmod.echo_beetroot.dimension_error");
+                ModUtils.displayMessage(player, "toast.beetrootmod.echo_beetroot.dimension_error");
             }
         });
 

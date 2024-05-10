@@ -1,7 +1,7 @@
 package net.jyu4.thebeetrootmod.gui;
 
-import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltar;
 import net.jyu4.thebeetrootmod.block.ModBlocks;
+import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityRepairStation;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,19 +12,20 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class AltarMenu extends AbstractContainerMenu {
-    public final BlockEntityAltar blockEntity;
+public class MenuRepairStation extends AbstractContainerMenu {
+
+    public final BlockEntityRepairStation blockEntity;
     private final Level level;
     private final ContainerData data;
 
-    public AltarMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+    public MenuRepairStation(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(8));
     }
 
-    public AltarMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.ALTAR_MENU.get(), pContainerId);
-        checkContainerSize(inv, 8);
-        blockEntity = ((BlockEntityAltar) entity);
+    public MenuRepairStation(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(ModMenuTypes.REPAIR_STATION_MENU.get(), pContainerId);
+        checkContainerSize(inv, 1);
+        blockEntity = ((BlockEntityRepairStation) entity);
         this.level = inv.player.level();
         this.data = data;
 
@@ -32,30 +33,33 @@ public class AltarMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 62, 11));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 11));
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 98, 11));
-            this.addSlot(new SlotItemHandler(iItemHandler, 3, 44, 48));
-            this.addSlot(new SlotItemHandler(iItemHandler, 4, 62, 48));
-            this.addSlot(new SlotItemHandler(iItemHandler, 5, 80, 48));
-            this.addSlot(new SlotItemHandler(iItemHandler, 6, 98, 48));
-            this.addSlot(new SlotItemHandler(iItemHandler, 7, 116, 48));
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 35));
         });
 
         addDataSlots(data);
     }
 
-    public boolean isCrafting() {
-        return data.get(0) > 0;
+
+
+    @Override
+    public boolean stillValid(Player pPlayer) {
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), pPlayer, ModBlocks.REPAIR_STATION.get());
     }
 
-    public int getScaledProgress() {
-        int progress = this.data.get(0);
-        int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 26; // This is the height in pixels of your arrow
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    private void addPlayerInventory(Inventory playerInventory) {
+        for (int i = 0; i < 3; ++i) {
+            for (int l = 0; l < 9; ++l) {
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
+            }
+        }
     }
+
+    private void addPlayerHotbar(Inventory playerInventory) {
+        for (int i = 0; i < 9; ++i) {
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+        }
+    }
+
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
     // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
@@ -72,7 +76,8 @@ public class AltarMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 8;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
+
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);
@@ -106,23 +111,7 @@ public class AltarMenu extends AbstractContainerMenu {
         return copyOfSourceStack;
     }
 
-    @Override
-    public boolean stillValid(Player pPlayer) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.ALTAR.get());
-    }
-
-    private void addPlayerInventory(Inventory playerInventory) {
-        for (int i = 0; i < 3; ++i) {
-            for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
-            }
-        }
-    }
-
-    private void addPlayerHotbar(Inventory playerInventory) {
-        for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
-        }
+    public BlockEntityRepairStation getTile() {
+        return blockEntity;
     }
 }

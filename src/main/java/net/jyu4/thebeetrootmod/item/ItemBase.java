@@ -10,10 +10,6 @@ public class ItemBase extends Item {
         super(pProperties);
     }
 
-    public void displayMessage(Player player, String translatable){
-        player.displayClientMessage(Component.translatable(translatable), true);
-    }
-
     public void performTeleportation(Player player, BlockPos blockPos){
         player.teleportTo(blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5);
     }
