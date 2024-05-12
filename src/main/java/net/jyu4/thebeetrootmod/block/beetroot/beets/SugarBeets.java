@@ -1,15 +1,15 @@
-package net.jyu4.thebeetrootmod.block.beetroots.beets;
+package net.jyu4.thebeetrootmod.block.beetroot.beets;
 
 import net.jyu4.thebeetrootmod.item.ModItems;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.BeetrootBlock;
 
-public class LeafBeets extends BeetrootBlock {
-    public LeafBeets(Properties pProperties) {
+public class SugarBeets extends BeetrootBlock {
+    public SugarBeets(Properties pProperties) {
         super(pProperties);
     }
 
     protected ItemLike getBaseSeedId() {
-        return ModItems.LEAF_BEET_SEEDS.get();
+        return ModItems.SUGAR_BEET_SEEDS.get();
     }
 }

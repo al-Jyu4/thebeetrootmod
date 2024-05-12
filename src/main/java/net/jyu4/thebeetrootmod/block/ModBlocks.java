@@ -1,10 +1,10 @@
 package net.jyu4.thebeetrootmod.block;
 
 import net.jyu4.thebeetrootmod.TheBeetrootMod;
-import net.jyu4.thebeetrootmod.block.beetroots.*;
-import net.jyu4.thebeetrootmod.block.beetroots.beets.*;
-import net.jyu4.thebeetrootmod.block.beetroots.crystals.*;
-import net.jyu4.thebeetrootmod.block.beetroots.exotics.*;
+import net.jyu4.thebeetrootmod.block.beetroot.*;
+import net.jyu4.thebeetrootmod.block.beetroot.beets.*;
+import net.jyu4.thebeetrootmod.block.beetroot.crystals.*;
+import net.jyu4.thebeetrootmod.block.beetroot.exotics.*;
 import net.jyu4.thebeetrootmod.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -46,7 +46,7 @@ public class ModBlocks {
 
     ///------------------------------///
     public static final RegistryObject<Block> WORKSTATION = registerBlock("workstation",() -> new BlockWorkstation(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final RegistryObject<Block> ALTAR = registerBlock("altar",() -> new BlockAltar(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
+    public static final RegistryObject<Block> ALTAR = registerBlock("altar",() -> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
     public static final RegistryObject<Block> WELL = registerBlock("well",() -> new BlockWell(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
     public static final RegistryObject<Block> SHRINE = registerBlock("shrine",() -> new BlockShrine(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));
     public static final RegistryObject<Block> RITUAL_RING = registerBlock("ritual_ring",() -> new BlockRitualRing(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).noOcclusion()));

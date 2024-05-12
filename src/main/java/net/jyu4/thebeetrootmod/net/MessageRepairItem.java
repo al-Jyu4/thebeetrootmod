@@ -47,6 +47,7 @@ public class MessageRepairItem implements Message<MessageRepairItem> {
 
         BlockEntityRepairStation repairStation = (BlockEntityRepairStation) be;
         repairStation.repairItem();
+
     }
 
     @Override

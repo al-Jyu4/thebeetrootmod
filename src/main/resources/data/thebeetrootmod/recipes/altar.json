@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:beetroot"
+    },
+    "X": {
+      "item": "minecraft:cobblestone"
+    },
+    "C": {
+      "item": "minecraft:cobblestone_slab"
+    },
+    "Z": {
+      "item": "minecraft:smooth_stone"
+    }
+  },
+  "pattern": [
+    " # ",
+    "CXC",
+    "ZZZ"
+  ],
+  "result": {
+    "item": "thebeetrootmod:altar"
+  },
+  "show_notification": true
+}

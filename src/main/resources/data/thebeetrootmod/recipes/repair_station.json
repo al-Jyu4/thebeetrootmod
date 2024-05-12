@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:beetroot"
+    },
+    "X": {
+      "item": "minecraft:crafting_table"
+    }
+  },
+  "pattern": [
+    "#",
+    "X"
+  ],
+  "result": {
+    "item": "thebeetrootmod:repair_station"
+  },
+  "show_notification": true
+}
