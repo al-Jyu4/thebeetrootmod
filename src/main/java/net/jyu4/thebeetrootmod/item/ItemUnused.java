@@ -1,6 +1,6 @@
 package net.jyu4.thebeetrootmod.item;
 
-import net.jyu4.thebeetrootmod.ModUtils;
+import net.jyu4.thebeetrootmod.util.ModUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;

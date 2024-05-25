@@ -1,4 +1,4 @@
-package net.jyu4.thebeetrootmod;
+package net.jyu4.thebeetrootmod.util;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;

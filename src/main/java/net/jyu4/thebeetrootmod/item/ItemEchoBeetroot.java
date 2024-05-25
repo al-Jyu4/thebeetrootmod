@@ -1,6 +1,6 @@
 package net.jyu4.thebeetrootmod.item;
 
-import net.jyu4.thebeetrootmod.ModUtils;
+import net.jyu4.thebeetrootmod.util.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;

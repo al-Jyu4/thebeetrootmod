@@ -1,6 +1,6 @@
 package net.jyu4.thebeetrootmod.block;
 
-import net.jyu4.thebeetrootmod.ModUtils;
+import net.jyu4.thebeetrootmod.util.ModUtils;
 import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltar;
 import net.jyu4.thebeetrootmod.block.blockentity.ModBlockEntities;
 import net.minecraft.core.BlockPos;

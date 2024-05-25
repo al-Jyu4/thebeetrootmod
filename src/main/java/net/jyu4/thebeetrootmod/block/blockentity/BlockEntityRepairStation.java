@@ -1,6 +1,7 @@
 package net.jyu4.thebeetrootmod.block.blockentity;
 
-import net.jyu4.thebeetrootmod.ModUtils;
+import net.jyu4.thebeetrootmod.util.ModEnergyStorage;
+import net.jyu4.thebeetrootmod.util.ModUtils;
 import net.jyu4.thebeetrootmod.gui.RepairStationMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -73,7 +74,7 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
         lazyItemHandler.invalidate();
     }
 
-    public void repairItem(){ //pLevel and pPos for playSound() method.
+    public void repairItem(){
 
         ItemStack itemStack = itemHandler.getStackInSlot(0);
         boolean emptySlot = itemStack.isEmpty();
@@ -134,4 +135,10 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
 
         return super.getCapability(cap, side);
     }
+
+    private final ModEnergyStorage ENERGY_STORAGE = new ModEnergyStorage(6000,256){
+        public void onEnergyChanged(){
+            setChanged();
+        }
+    };
 }
