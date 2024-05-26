@@ -190,4 +190,12 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
             setChanged();
         }
     };
+
+    public IEnergyStorage getEnergyStorage() {
+        return ENERGY_STORAGE;
+    }
+
+    public void setEnergyLevel(int energy) { //set energy level for client
+        this.ENERGY_STORAGE.setEnergy(energy);
+    }
 }

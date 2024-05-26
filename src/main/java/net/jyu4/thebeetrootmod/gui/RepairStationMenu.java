@@ -2,6 +2,7 @@ package net.jyu4.thebeetrootmod.gui;
 
 import net.jyu4.thebeetrootmod.block.ModBlocks;
 import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityRepairStation;
+import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -113,5 +114,9 @@ public class RepairStationMenu extends AbstractContainerMenu {
 
     public BlockEntityRepairStation getTile() {
         return blockEntity;
+    }
+
+    public BlockEntityRepairStation getBlockEntity() {
+        return this.blockEntity;
     }
 }

@@ -3,7 +3,9 @@ package net.jyu4.thebeetrootmod.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.jyu4.thebeetrootmod.TheBeetrootMod;
 import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityRepairStation;
+import net.jyu4.thebeetrootmod.gui.renderer.EnergyInfoArea;
 import net.jyu4.thebeetrootmod.net.MessageRepairItem;
+import net.jyu4.thebeetrootmod.util.ModMouseUtil;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -22,6 +24,8 @@ import java.util.Optional;
 public class RepairStationScreen extends AbstractContainerScreen<RepairStationMenu> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/gui_repair_station.png");
+
+    private EnergyInfoArea energyInfoArea;
 
     private BlockEntityRepairStation be;
     private Player player;
@@ -45,6 +49,7 @@ public class RepairStationScreen extends AbstractContainerScreen<RepairStationMe
     @Override
     protected void init() {
         super.init();
+        assignEnergyInfoArea();
 
         this.leftPos = (this.width - this.imageWidth) /2;
         this.topPos = (this.height - this.imageHeight) /2;
@@ -56,9 +61,27 @@ public class RepairStationScreen extends AbstractContainerScreen<RepairStationMe
 
     }
 
+    private void assignEnergyInfoArea() {
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
+
+        energyInfoArea = new EnergyInfoArea(x+156,y+13, menu.blockEntity.getEnergyStorage());
+    }
+
     public void containerTick() {
         super.containerTick();
         this.slotIcon.tick(EMPTY_SLOT_SMITHING_TEMPLATES);
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
+    }
+
+
+    private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
+        return ModMouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }
 
     @Override
@@ -73,6 +96,8 @@ public class RepairStationScreen extends AbstractContainerScreen<RepairStationMe
 
         //renderProgressArrow(guiGraphics, x, y);
         this.renderOnboardingTooltips(guiGraphics, pMouseX, pMouseY);
+
+        energyInfoArea.draw(guiGraphics);
     }
 
     @Override
