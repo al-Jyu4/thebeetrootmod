@@ -15,7 +15,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
 
     private BlockEntityAltar be;
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/repair_station_gui.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/gui_repair_station.png");
 
 
     public AltarScreen(AltarMenu pMenu, Inventory pPlayerInventory, Component pTitle) {

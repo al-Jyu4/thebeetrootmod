@@ -40,13 +40,8 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
     private int progress = 0;
     private int maxProgress = 78;
 
-    public final int maxStorage;
-    public int storedEnergy;
-
     public BlockEntityRepairStation(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.REPAIR_STATION_BE.get(), pPos, pBlockState);
-        this.maxStorage = 3456;
-        this.storedEnergy = 0;
         this.data = new ContainerData() {
             @Override
             public int get(int pIndex) {
@@ -108,8 +103,8 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
 
         if(beetrootInSlot(pEntity)) {
             pEntity.itemHandler.extractItem(0, 1, false);
-            storedEnergy += 1;
-            //pEntity.ENERGY_STORAGE.receiveEnergy(1, false);
+            //storedEnergy += 1;
+            pEntity.ENERGY_STORAGE.receiveEnergy(1, false);
         }
     }
 
@@ -125,8 +120,8 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
         if (!lostDurability(itemStack)) return;
 
         int itemDamage = itemStack.getDamageValue();
-        //int energyStored = ENERGY_STORAGE.getEnergyStored();
-        int repairAmount = Math.min(itemDamage, storedEnergy);
+        int energyStored = ENERGY_STORAGE.getEnergyStored();
+        int repairAmount = Math.min(itemDamage, energyStored);
         itemStack.setDamageValue(itemDamage - repairAmount);
         consumeEnergy(pEntity, repairAmount);
 
@@ -191,7 +186,7 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
     }
 
     ///------------------------------///
-    private final ModEnergyStorage ENERGY_STORAGE = new ModEnergyStorage(6000,256){
+    private final ModEnergyStorage ENERGY_STORAGE = new ModEnergyStorage(3456,256){
         public void onEnergyChanged(){
             setChanged();
         }
@@ -201,8 +196,8 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
         this.ENERGY_STORAGE.setEnergy(energy);
     }
 
-    public int getStoredEnergy() {
-        return storedEnergy;
+    public IEnergyStorage getEnergyStorage() {
+        return ENERGY_STORAGE;
     }
 
 
