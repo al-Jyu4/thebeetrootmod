@@ -40,8 +40,13 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
     private int progress = 0;
     private int maxProgress = 78;
 
+    public final int maxStorage;
+    public int storedEnergy;
+
     public BlockEntityRepairStation(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.REPAIR_STATION_BE.get(), pPos, pBlockState);
+        this.maxStorage = 3456;
+        this.storedEnergy = 0;
         this.data = new ContainerData() {
             @Override
             public int get(int pIndex) {
@@ -98,12 +103,13 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
     }
 
     ///------------------------------///
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntityRepairStation pEntity) {
+    public void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntityRepairStation pEntity) {
         if(pLevel.isClientSide()) return;
 
         if(beetrootInSlot(pEntity)) {
             pEntity.itemHandler.extractItem(0, 1, false);
-            pEntity.ENERGY_STORAGE.receiveEnergy(1, false);
+            storedEnergy += 1;
+            //pEntity.ENERGY_STORAGE.receiveEnergy(1, false);
         }
     }
 
@@ -119,8 +125,8 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
         if (!lostDurability(itemStack)) return;
 
         int itemDamage = itemStack.getDamageValue();
-        int energyStored = ENERGY_STORAGE.getEnergyStored();
-        int repairAmount = Math.min(itemDamage, energyStored);
+        //int energyStored = ENERGY_STORAGE.getEnergyStored();
+        int repairAmount = Math.min(itemDamage, storedEnergy);
         itemStack.setDamageValue(itemDamage - repairAmount);
         consumeEnergy(pEntity, repairAmount);
 
@@ -191,11 +197,13 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
         }
     };
 
-    public IEnergyStorage getEnergyStorage() {
-        return ENERGY_STORAGE;
-    }
-
     public void setEnergyLevel(int energy) { //set energy level for client
         this.ENERGY_STORAGE.setEnergy(energy);
     }
+
+    public int getStoredEnergy() {
+        return storedEnergy;
+    }
+
+
 }

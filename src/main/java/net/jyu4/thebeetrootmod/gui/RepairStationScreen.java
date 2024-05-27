@@ -3,9 +3,7 @@ package net.jyu4.thebeetrootmod.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.jyu4.thebeetrootmod.TheBeetrootMod;
 import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityRepairStation;
-import net.jyu4.thebeetrootmod.gui.renderer.EnergyInfoArea;
 import net.jyu4.thebeetrootmod.net.MessageRepairItem;
-import net.jyu4.thebeetrootmod.util.ModMouseUtil;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -13,19 +11,19 @@ import net.minecraft.client.gui.screens.inventory.CyclingSlotBackground;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.network.simple.SimpleChannel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class RepairStationScreen extends AbstractContainerScreen<RepairStationMenu> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/gui_repair_station.png");
-
-    private EnergyInfoArea energyInfoArea;
 
     private BlockEntityRepairStation be;
     private Player player;
@@ -49,39 +47,20 @@ public class RepairStationScreen extends AbstractContainerScreen<RepairStationMe
     @Override
     protected void init() {
         super.init();
-        assignEnergyInfoArea();
 
         this.leftPos = (this.width - this.imageWidth) /2;
         this.topPos = (this.height - this.imageHeight) /2;
 
         this.repairButton = addRenderableWidget(Button.builder(Component.translatable("button.thebeetrootmod.repair"), button -> {
-            SimpleChannel channel = TheBeetrootMod.SIMPLE_CHANNEL; // Your network channel
+            SimpleChannel channel = TheBeetrootMod.SIMPLE_CHANNEL;
             TheBeetrootMod.SIMPLE_CHANNEL.sendToServer(new MessageRepairItem(be.getBlockPos(), player, true));
         }).bounds(leftPos + 115, topPos + 34, 54, 19).build());
 
     }
 
-    private void assignEnergyInfoArea() {
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
-
-        energyInfoArea = new EnergyInfoArea(x+156,y+13, menu.blockEntity.getEnergyStorage());
-    }
-
     public void containerTick() {
         super.containerTick();
         this.slotIcon.tick(EMPTY_SLOT_SMITHING_TEMPLATES);
-    }
-
-    @Override
-    protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
-    }
-
-
-    private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
-        return ModMouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }
 
     @Override
@@ -92,12 +71,11 @@ public class RepairStationScreen extends AbstractContainerScreen<RepairStationMe
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
+        drawEnergy(guiGraphics);
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
         //renderProgressArrow(guiGraphics, x, y);
-        this.renderOnboardingTooltips(guiGraphics, pMouseX, pMouseY);
-
-        energyInfoArea.draw(guiGraphics);
+        //this.renderOnboardingTooltips(guiGraphics, pMouseX, pMouseY);
     }
 
     @Override
@@ -117,4 +95,40 @@ public class RepairStationScreen extends AbstractContainerScreen<RepairStationMe
             pGuiGraphics.renderTooltip(this.font, this.font.split(p_280863_, 115), pMouseX, pMouseY);
         });
     }
+
+    @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        super.renderLabels(guiGraphics, mouseX, mouseY);
+
+        if (mouseX >= leftPos + 122 && mouseX <= leftPos + 16 + 122) {
+            if (mouseY >= topPos + 8 && mouseY <= topPos + 57 + 8) {
+                List<FormattedCharSequence> list = new ArrayList<>();
+                list.add(Component.translatable("tooltip.energy", be.getStoredEnergy()).getVisualOrderText());
+                guiGraphics.renderTooltip(font, list, mouseX - leftPos, mouseY - topPos);
+            }
+        }
+    }
+
+    public void drawEnergy(GuiGraphics guiGraphics) {
+        float perc = getEnergy();
+
+        int texX = 176;
+        int texY = 17;
+        int texW = 16;
+        int texH = 57;
+        int targetX = 122;
+        int targetY = 8;
+
+        int scHeight = (int) (texH * (1 - perc));
+        int i = this.leftPos;
+        int j = this.topPos;
+        guiGraphics.blit(TEXTURE, i + targetX, j + targetY + scHeight, texX, texY + scHeight, texW, texH - scHeight);
+    }
+
+    public float getEnergy() {
+        return ((float) be.getStoredEnergy()) / ((float) be.maxStorage);
+    }
 }
+
+
+
