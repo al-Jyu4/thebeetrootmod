@@ -8,6 +8,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
@@ -20,10 +23,12 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -35,58 +40,52 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
     private static final Component CONTAINER_TITLE = Component.translatable("block.thebeetrootmod.repair_station");
     private final ItemStackHandler itemHandler = new ItemStackHandler(1);
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
-    protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 78;
 
+    private final JuiceStorage energy = new JuiceStorage(3456, 0, 0, 0);
+    private final LazyOptional<JuiceStorage> energyOptional = LazyOptional.of(() -> this.energy);
+
     public BlockEntityRepairStation(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.REPAIR_STATION_BE.get(), pPos, pBlockState);
-        this.data = new ContainerData() {
-            @Override
-            public int get(int pIndex) {
-                return switch (pIndex) {
-                    case 0 -> BlockEntityRepairStation.this.progress;
-                    case 1 -> BlockEntityRepairStation.this.maxProgress;
-                    default -> 0;
-                };
-            }
-
-            @Override
-            public void set(int pIndex, int pValue) {
-                switch (pIndex) {
-                    case 0 -> BlockEntityRepairStation.this.progress = pValue;
-                    case 1 -> BlockEntityRepairStation.this.maxProgress = pValue;
-                }
-            }
-
-            @Override
-            public int getCount() {
-                return 1;
-            }
-        };
     }
+
+    private final ContainerData data = new ContainerData() {
+        @Override
+        public int get(int pIndex) {
+            return switch (pIndex){
+                case 0 -> BlockEntityRepairStation.this.energy.getEnergyStored();
+                case 1 -> BlockEntityRepairStation.this.energy.getMaxEnergyStored();
+                default -> 0;
+            };
+        }
+
+        @Override
+        public void set(int pIndex, int pValue) {
+            switch (pIndex){
+                case 0 -> BlockEntityRepairStation.this.energy.setEnergy(pValue);
+            };
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+    };
 
     ///------------------------------///
     @Override
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
-        lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
-    }
-
-    @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        lazyItemHandler.invalidate();
-        lazyEnergyHandler.invalidate();
+        //lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
-
-        pTag.putInt("repair_station_energy", ENERGY_STORAGE.getEnergyStored());
+        pTag.put("Energy", this.energy.serializeNBT());
+        //pTag.putInt("repair_station_energy", ENERGY_STORAGE.getEnergyStored());
         super.saveAdditional(pTag);
     }
 
@@ -94,17 +93,26 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
     public void load(CompoundTag pTag) {
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
-        ENERGY_STORAGE.setEnergy(pTag.getInt("repair_station_energy"));
+        this.energy.deserializeNBT(pTag.get("Energy"));
+        //ENERGY_STORAGE.setEnergy(pTag.getInt("repair_station_energy"));
     }
 
     ///------------------------------///
     public void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntityRepairStation pEntity) {
         if(pLevel.isClientSide()) return;
 
-        if(beetrootInSlot(pEntity)) {
-            pEntity.itemHandler.extractItem(0, 1, false);
-            //storedEnergy += 1;
-            pEntity.ENERGY_STORAGE.receiveEnergy(1, false);
+        if(!canFillEnergy()) return;
+
+        if (beetrootInSlot(pEntity)) {
+            int itemCount = pEntity.itemHandler.getStackInSlot(0).getCount();
+            int neededEnergy = this.energy.getMaxEnergyStored() - this.energy.getEnergyStored();
+            int itemsToConsume = Math.min(itemCount, neededEnergy);
+
+            pEntity.itemHandler.extractItem(0, itemsToConsume, false);
+
+            this.energy.addEnergy(itemsToConsume);
+
+            sendUpdate();
         }
     }
 
@@ -120,14 +128,19 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
         if (!lostDurability(itemStack)) return;
 
         int itemDamage = itemStack.getDamageValue();
-        int energyStored = ENERGY_STORAGE.getEnergyStored();
+        int energyStored = energy.getEnergyStored();
         int repairAmount = Math.min(itemDamage, energyStored);
         itemStack.setDamageValue(itemDamage - repairAmount);
         consumeEnergy(pEntity, repairAmount);
+        sendUpdate();
 
         Level pLevel = getLevel();
         BlockPos pPos = getBlockPos();
         ModUtils.playSound(pLevel, pPos, SoundEvents.VILLAGER_WORK_FLETCHER);
+    }
+
+    private boolean canFillEnergy(){
+        return this.energy.getEnergyStored() + 1 < this.energy.getMaxEnergyStored();
     }
 
     private boolean hasEnchantments(ItemStack itemStack) {
@@ -140,7 +153,7 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
         return pEntity.itemHandler.getStackInSlot(0).getItem() == Items.BEETROOT;
     }
 
-    private boolean hasEnergy(BlockEntityRepairStation pEntity){return pEntity.ENERGY_STORAGE.getEnergyStored() > 0;}
+    private boolean hasEnergy(BlockEntityRepairStation pEntity){return pEntity.energy.getEnergyStored() > 0;}
 
     private boolean hasDurability(ItemStack itemStack){
         return itemStack.getItem().getMaxDamage() > 0;
@@ -151,7 +164,7 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
     }
 
     private static void consumeEnergy(BlockEntityRepairStation pEntity, int repairAmount) {
-        pEntity.ENERGY_STORAGE.extractEnergy(repairAmount, false);
+        pEntity.energy.removeEnergy(repairAmount);
     }
 
     ///------------------------------///
@@ -175,7 +188,7 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == ForgeCapabilities.ENERGY){
-            return lazyEnergyHandler.cast();
+            return energyOptional.cast();
         }
 
         if(cap == ForgeCapabilities.ITEM_HANDLER) {
@@ -185,20 +198,32 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
         return super.getCapability(cap, side);
     }
 
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        lazyItemHandler.invalidate();
+        this.energyOptional.invalidate();
+    }
+
     ///------------------------------///
-    private final ModEnergyStorage ENERGY_STORAGE = new ModEnergyStorage(3456,256){
-        public void onEnergyChanged(){
-            setChanged();
-        }
-    };
 
-    public void setEnergyLevel(int energy) { //set energy level for client
-        this.ENERGY_STORAGE.setEnergy(energy);
+    private void sendUpdate() {
+        setChanged();
+
+        if(this.level != null)
+            this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
     }
 
-    public IEnergyStorage getEnergyStorage() {
-        return ENERGY_STORAGE;
+    @Override
+    public @NotNull CompoundTag getUpdateTag() {
+        CompoundTag nbt = super.getUpdateTag();
+        saveAdditional(nbt);
+        return nbt;
     }
 
-
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
 }

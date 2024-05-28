@@ -2,7 +2,6 @@ package net.jyu4.thebeetrootmod.gui;
 
 import net.jyu4.thebeetrootmod.block.ModBlocks;
 import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityRepairStation;
-import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -19,10 +18,15 @@ public class RepairStationMenu extends AbstractContainerMenu {
     private final Level level;
     private final ContainerData data;
 
+    // Client Constructor
     public RepairStationMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(8));
+        this(pContainerId,
+                inv,
+                inv.player.level().getBlockEntity(extraData.readBlockPos()),
+                new SimpleContainerData(2)); // getCount() = 2
     }
 
+    // Server Constructor
     public RepairStationMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.REPAIR_STATION_MENU.get(), pContainerId);
         checkContainerSize(inv, 1);
@@ -112,11 +116,21 @@ public class RepairStationMenu extends AbstractContainerMenu {
         return copyOfSourceStack;
     }
 
-    public BlockEntityRepairStation getTile() {
+    ////
+
+    public BlockEntityRepairStation getBlockEntity() {
         return blockEntity;
     }
 
-    public BlockEntityRepairStation getBlockEntity() {
-        return this.blockEntity;
+    public int getEnergy(){
+        return this.data.get(0);
+    }
+
+    public int getMaxEnergy(){
+        return this.data.get(1);
+    }
+
+    public int getEnergyStoredScaled(){
+        return (int) ((float) getEnergy() / (float) getMaxEnergy() * 52); // 53 height of the energy bar
     }
 }

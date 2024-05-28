@@ -24,9 +24,12 @@ public class RepairStationScreen extends AbstractContainerScreen<RepairStationMe
     Button repairButton;
     private int leftPos, topPos;
 
+
+
+
     public RepairStationScreen(RepairStationMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
-        this.be = pMenu.getTile();
+        this.be = pMenu.getBlockEntity();
         this.player = pPlayerInventory.player;
     }
 
@@ -53,6 +56,19 @@ public class RepairStationScreen extends AbstractContainerScreen<RepairStationMe
         int y = (height - imageHeight) / 2;
 
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
+
+        ///
+
+        int energy =  this.menu.getEnergyStoredScaled();
+
+        // foreground
+        guiGraphics.fill(
+                this.leftPos + 26,
+                this.topPos + 17 + (52-energy),
+                this.leftPos + 42,
+                this.topPos + 69,
+                0xFFCC2222
+        );
     }
 
     @Override
@@ -61,7 +77,14 @@ public class RepairStationScreen extends AbstractContainerScreen<RepairStationMe
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 
+        if(isHovering(26, 17, 16, 52, mouseX, mouseY)){
+            int energyStored = this.menu.getEnergy();
+            int maxEnergy = this.menu.getMaxEnergy();
+            Component text = Component.literal("Energy: " + energyStored + " / " + maxEnergy);
+            guiGraphics.renderTooltip(this.font, text, mouseX, mouseY); // render position mouseX and mouseY
+        }
     }
+
 }
 
 
