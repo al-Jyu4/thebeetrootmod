@@ -21,11 +21,8 @@ public class RepairStationScreen extends AbstractContainerScreen<RepairStationMe
     private BlockEntityRepairStation be;
     private Player player;
 
-    Button repairButton;
     private int leftPos, topPos;
-
-
-
+    Button repairButton;
 
     public RepairStationScreen(RepairStationMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -57,7 +54,7 @@ public class RepairStationScreen extends AbstractContainerScreen<RepairStationMe
 
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
-        ///
+
 
         int energy =  this.menu.getEnergyStoredScaled();
 
@@ -69,6 +66,7 @@ public class RepairStationScreen extends AbstractContainerScreen<RepairStationMe
                 this.topPos + 69,
                 0xFFCC2222
         );
+
     }
 
     @Override
@@ -80,11 +78,10 @@ public class RepairStationScreen extends AbstractContainerScreen<RepairStationMe
         if(isHovering(26, 17, 16, 52, mouseX, mouseY)){
             int energyStored = this.menu.getEnergy();
             int maxEnergy = this.menu.getMaxEnergy();
-            Component text = Component.literal("Energy: " + energyStored + " / " + maxEnergy);
+            Component text = Component.translatable("thebeetrootmod.juice_level").append(energyStored + " / " + maxEnergy);
             guiGraphics.renderTooltip(this.font, text, mouseX, mouseY); // render position mouseX and mouseY
         }
     }
-
 }
 
 
