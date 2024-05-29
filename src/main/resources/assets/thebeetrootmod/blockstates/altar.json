@@ -1,33 +1,18 @@
 {
   "variants": {
-    "facing=east,lit=false": {
+    "facing=east": {
       "model": "thebeetrootmod:block/altar",
       "y": 90
     },
-    "facing=north,lit=false": {
+    "facing=north": {
       "model": "thebeetrootmod:block/altar"
     },
-    "facing=south,lit=false": {
+    "facing=south": {
       "model": "thebeetrootmod:block/altar",
       "y": 180
     },
-    "facing=west,lit=false": {
+    "facing=west": {
       "model": "thebeetrootmod:block/altar",
-      "y": 270
-    },
-    "facing=east,lit=true": {
-      "model": "thebeetrootmod:block/altar_lit",
-      "y": 90
-    },
-    "facing=north,lit=true": {
-      "model": "thebeetrootmod:block/altar_lit"
-    },
-    "facing=south,lit=true": {
-      "model": "thebeetrootmod:block/altar_lit",
-      "y": 180
-    },
-    "facing=west,lit=true": {
-      "model": "thebeetrootmod:block/altar_lit",
       "y": 270
     }
   }

@@ -39,14 +39,14 @@ import org.jetbrains.annotations.Nullable;
 public class AltarBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-    protected static final VoxelShape X_SHAPE_ALTAR = Block.box(3.0, 3.0, 1.0, 13.0, 9.0, 15.0);;
-    protected static final VoxelShape Z_SHAPE_ALTAR = Block.box(1.0, 3.0, 3.0, 15.0, 9.0, 13.0);;
+    protected static final VoxelShape X_SHAPE_ALTAR = Block.box(3.0, 3.0, 1.0, 13.0, 9.0, 15.0);
+    protected static final VoxelShape Z_SHAPE_ALTAR = Block.box(1.0, 3.0, 3.0, 15.0, 9.0, 13.0);
 
-    protected static final VoxelShape X_SHAPE_BASE = Block.box(2.0, 0.0, 0.0, 14.0, 3.0, 16.0);;
-    protected static final VoxelShape Z_SHAPE_BASE = Block.box(0.0, 0.0, 2.0, 16.0, 3.0, 14.0);;
+    protected static final VoxelShape X_SHAPE_BASE = Block.box(2.0, 0.0, 0.0, 14.0, 3.0, 16.0);
+    protected static final VoxelShape Z_SHAPE_BASE = Block.box(0.0, 0.0, 2.0, 16.0, 3.0, 14.0);
 
-    protected static final VoxelShape X_SHAPE = Shapes.or(X_SHAPE_ALTAR, X_SHAPE_BASE);;
-    protected static final VoxelShape Z_SHAPE = Shapes.or(Z_SHAPE_ALTAR, Z_SHAPE_BASE);;
+    protected static final VoxelShape X_SHAPE = Shapes.or(X_SHAPE_ALTAR, X_SHAPE_BASE);
+    protected static final VoxelShape Z_SHAPE = Shapes.or(Z_SHAPE_ALTAR, Z_SHAPE_BASE);
 
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
@@ -148,7 +148,6 @@ public class AltarBlock extends BaseEntityBlock {
                 ((BlockEntityAltarOld) blockEntity).drops();
             }
         }
-
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 
@@ -157,15 +156,15 @@ public class AltarBlock extends BaseEntityBlock {
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new BlockEntityAltarOld(pPos, pState);
     }
-
+/*
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         if(pLevel.isClientSide()) {
             return null;
         }
-
-        return createTickerHelper(pBlockEntityType, ModBlockEntities.ALTAR_BE.get(),
-                (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1, pBlockEntity));
+        return createTickerHelper(pBlockEntityType, ModBlockEntities.ALTAR_BE.get(),(pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1, pBlockEntity));
     }
+
+ */
 }

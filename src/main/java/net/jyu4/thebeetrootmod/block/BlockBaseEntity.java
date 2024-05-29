@@ -21,16 +21,14 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class BlockBaseEntity extends BaseEntityBlock {
+
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-    private UUID owner;
+    ///------------------------------///
+    // base
 
     public BlockBaseEntity(Properties pProperties) {
         super(pProperties);
-    }
-
-    public boolean isOwner(Player player) {
-        return player.getUUID().equals(owner);
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
@@ -50,18 +48,23 @@ public class BlockBaseEntity extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    ///
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return null;
+    }
 
     @Nullable
     protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> pServerType, BlockEntityType<E> pClientType, BlockEntityTicker<? super E> pTicker) {
         return pClientType == pServerType ? (BlockEntityTicker<A>)pTicker : null;
     }
 
-    @org.jetbrains.annotations.Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return null;
+
+    ///------------------------------///
+    // owner
+
+    private UUID owner;
+
+    public boolean isOwner(Player player) {
+        return player.getUUID().equals(owner);
     }
-
-
 }

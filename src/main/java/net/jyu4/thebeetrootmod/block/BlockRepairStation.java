@@ -25,25 +25,30 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockRepairStation extends BlockBaseEntity {
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-    protected static final VoxelShape X_SHAPE_TABLE = Block.box(2.0, 5.0, 0.0, 14.0, 8.0, 16.0);
-    protected static final VoxelShape Z_SHAPE_TABLE = Block.box(0.0, 5.0, 2.0, 16.0, 8.0, 14.0);
+    ///------------------------------///
+    // shape
 
-    protected static final VoxelShape X_SHAPE_LEG_1 = Block.box(2.0, 0.0, 2.0, 4, 5.0, 5);
-    protected static final VoxelShape X_SHAPE_LEG_2 = Block.box(2.0, 0.0, 11, 4, 5.0, 14);
-    protected static final VoxelShape X_SHAPE_LEG_3 = Block.box(12, 0.0, 2.0, 14, 5.0, 5);
-    protected static final VoxelShape X_SHAPE_LEG_4 = Block.box(12, 0.0, 11, 14, 5.0, 14);
+    protected static final VoxelShape TABLE0 = Block.box(2.0, 5.0, 0.0, 14.0, 8.0, 16.0);
+    protected static final VoxelShape TABLE1 = Block.box(0.0, 5.0, 2.0, 16.0, 8.0, 14.0);
 
-    protected static final VoxelShape Z_SHAPE_LEG_1 = Block.box(2.0, 0.0, 2.0, 5.0, 5.0, 4.0);
-    protected static final VoxelShape Z_SHAPE_LEG_2 = Block.box(2.0, 0.0, 12, 5.0, 5.0, 14);
-    protected static final VoxelShape Z_SHAPE_LEG_3 = Block.box(11.0, 0.0, 2.0, 14.0, 5.0, 4.0);
-    protected static final VoxelShape Z_SHAPE_LEG_4 = Block.box(11.0, 0.0, 12, 14.0, 5.0, 14);
+    protected static final VoxelShape LEG00 = Block.box(2.0, 0.0, 2.0, 4, 5.0, 5);
+    protected static final VoxelShape LEG01 = Block.box(2.0, 0.0, 11, 4, 5.0, 14);
+    protected static final VoxelShape LEG02 = Block.box(12, 0.0, 2.0, 14, 5.0, 5);
+    protected static final VoxelShape LEG03 = Block.box(12, 0.0, 11, 14, 5.0, 14);
 
-    protected static final VoxelShape X_LEGS = Shapes.or(X_SHAPE_LEG_1, X_SHAPE_LEG_2,X_SHAPE_LEG_3,X_SHAPE_LEG_4);
-    protected static final VoxelShape Z_LEGS = Shapes.or(Z_SHAPE_LEG_1, Z_SHAPE_LEG_2,Z_SHAPE_LEG_3,Z_SHAPE_LEG_4);
-    protected static final VoxelShape X_SHAPE = Shapes.or(X_LEGS, X_SHAPE_TABLE);
-    protected static final VoxelShape Z_SHAPE = Shapes.or(Z_LEGS, Z_SHAPE_TABLE);
+    protected static final VoxelShape LEG10 = Block.box(2.0, 0.0, 2.0, 5.0, 5.0, 4.0);
+    protected static final VoxelShape LEG11 = Block.box(2.0, 0.0, 12, 5.0, 5.0, 14);
+    protected static final VoxelShape LEG12 = Block.box(11.0, 0.0, 2.0, 14.0, 5.0, 4.0);
+    protected static final VoxelShape LEG13 = Block.box(11.0, 0.0, 12, 14.0, 5.0, 14);
+
+    protected static final VoxelShape LEGS0 = Shapes.or(LEG00, LEG01, LEG02, LEG03);
+    protected static final VoxelShape LEGS1 = Shapes.or(LEG10, LEG11, LEG12, LEG13);
+    protected static final VoxelShape SHAPE0 = Shapes.or(LEGS0, TABLE0);
+    protected static final VoxelShape SHAPE1 = Shapes.or(LEGS1, TABLE1);
+
+    ///------------------------------///
+    // base
 
     public BlockRepairStation(Properties pProperties) {
         super(pProperties);
@@ -51,11 +56,9 @@ public class BlockRepairStation extends BlockBaseEntity {
 
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return switch ((Direction) pState.getValue(FACING)) {
-            case NORTH -> Z_SHAPE;
-            case SOUTH -> Z_SHAPE;
-            case EAST -> X_SHAPE;
-            case WEST -> X_SHAPE;
-            default -> Z_SHAPE;
+            case NORTH, SOUTH -> SHAPE1;
+            case EAST, WEST -> SHAPE0;
+            default -> SHAPE1;
         };
     }
 
@@ -65,6 +68,29 @@ public class BlockRepairStation extends BlockBaseEntity {
         return new BlockEntityRepairStation(pPos, pState);
     }
 
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (pState.getBlock() != pNewState.getBlock()) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            if (blockEntity instanceof BlockEntityRepairStation) {
+                ((BlockEntityRepairStation) blockEntity).drops();
+            }
+        }
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+    }
+
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        if(pLevel.isClientSide()) {
+            return null;
+        }
+        return createTickerHelper(pBlockEntityType, ModBlockEntities.REPAIR_STATION_BE.get(),(pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1, pBlockEntity));
+    }
+
+    ///------------------------------///
+    // functionalities
+
+    @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (pLevel.isClientSide()) {
             return InteractionResult.sidedSuccess(true);
@@ -76,38 +102,7 @@ public class BlockRepairStation extends BlockBaseEntity {
         }
 
         BlockEntityRepairStation repairStation = (BlockEntityRepairStation) be;
-        /*
-        if (!repairStation.isOwner(pPlayer)) {
-            ModUtils.displayMessage(pPlayer, "block.thebeetrootmod.altar.not_owned");
-            pLevel.playSound(null, pPos.getX(), pPos.getY(), pPos.getZ(), SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 1.0F, 1.0F);
-            return InteractionResult.sidedSuccess(false);
-        }
-
-         */
-        //ModUtils.displayMessage(pPlayer, "debug.beetrootmod");
         NetworkHooks.openScreen((ServerPlayer) pPlayer, repairStation, pPos);
         return InteractionResult.sidedSuccess(false);
-    }
-
-    @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (pState.getBlock() != pNewState.getBlock()) {
-            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof BlockEntityRepairStation) {
-                ((BlockEntityRepairStation) blockEntity).drops();
-            }
-        }
-
-        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
-    }
-
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        if(pLevel.isClientSide()) {
-            return null;
-        }
-
-        return createTickerHelper(pBlockEntityType, ModBlockEntities.REPAIR_STATION_BE.get(),
-                (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1, pBlockEntity));
     }
 }
