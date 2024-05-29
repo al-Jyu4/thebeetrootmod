@@ -2,7 +2,7 @@ package net.jyu4.thebeetrootmod.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.jyu4.thebeetrootmod.TheBeetrootMod;
-import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltar;
+import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltarOld;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
 
-    private BlockEntityAltar be;
+    private BlockEntityAltarOld be;
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/gui_repair_station.png");
 

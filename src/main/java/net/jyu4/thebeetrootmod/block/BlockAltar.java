@@ -1,6 +1,6 @@
 package net.jyu4.thebeetrootmod.block;
 
-import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltar;
+import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltarOld;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -51,7 +51,7 @@ public class BlockAltar extends BlockBase implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new BlockEntityAltar(pPos, pState);
+        return new BlockEntityAltarOld(pPos, pState);
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {

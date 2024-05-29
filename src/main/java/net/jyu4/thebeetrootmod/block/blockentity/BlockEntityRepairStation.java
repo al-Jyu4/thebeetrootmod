@@ -1,16 +1,11 @@
 package net.jyu4.thebeetrootmod.block.blockentity;
 
-import net.jyu4.thebeetrootmod.Config;
-import net.jyu4.thebeetrootmod.util.ModEnergyStorage;
 import net.jyu4.thebeetrootmod.util.ModUtils;
 import net.jyu4.thebeetrootmod.gui.RepairStationMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
@@ -23,31 +18,61 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.EnergyStorage;
-import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockEntityRepairStation extends BlockEntityBase implements MenuProvider {
+public class BlockEntityRepairStation extends BlockEntityBase {
 
     private static final Component CONTAINER_TITLE = Component.translatable("block.thebeetrootmod.repair_station");
+
     private final ItemStackHandler itemHandler = new ItemStackHandler(1);
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    private int progress = 0;
-    private int maxProgress = 78;
 
     private final JuiceStorage energy = new JuiceStorage(3456, 0, 0, 0);
     private final LazyOptional<JuiceStorage> energyOptional = LazyOptional.of(() -> this.energy);
 
+    ///------------------------------///
+    // base
+
     public BlockEntityRepairStation(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.REPAIR_STATION_BE.get(), pPos, pBlockState);
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return CONTAINER_TITLE;
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+        return new RepairStationMenu(pContainerId, pPlayerInventory, this, this.data);
+    }
+
+    @Override
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if (cap == ForgeCapabilities.ENERGY){
+            return energyOptional.cast();
+        }
+
+        if(cap == ForgeCapabilities.ITEM_HANDLER) {
+            return lazyItemHandler.cast();
+        }
+
+        return super.getCapability(cap, side);
+    }
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        lazyItemHandler.invalidate();
+        this.energyOptional.invalidate();
     }
 
     private final ContainerData data = new ContainerData() {
@@ -73,19 +98,25 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
         }
     };
 
+    public void drops() {
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        inventory.setItem(0, itemHandler.getStackInSlot(0));
+        Containers.dropContents(this.level, this.worldPosition, inventory);
+    }
+
     ///------------------------------///
+    // save
+
     @Override
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
-        //lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
-        pTag.put("Energy", this.energy.serializeNBT());
-        //pTag.putInt("repair_station_energy", ENERGY_STORAGE.getEnergyStored());
+        pTag.put("energy", this.energy.serializeNBT());
         super.saveAdditional(pTag);
     }
 
@@ -93,11 +124,12 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
     public void load(CompoundTag pTag) {
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
-        this.energy.deserializeNBT(pTag.get("Energy"));
-        //ENERGY_STORAGE.setEnergy(pTag.getInt("repair_station_energy"));
+        this.energy.deserializeNBT(pTag.get("energy"));
     }
 
     ///------------------------------///
+    // functionalities
+
     public void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntityRepairStation pEntity) {
         if(pLevel.isClientSide()) return;
 
@@ -165,65 +197,5 @@ public class BlockEntityRepairStation extends BlockEntityBase implements MenuPro
 
     private static void consumeEnergy(BlockEntityRepairStation pEntity, int repairAmount) {
         pEntity.energy.removeEnergy(repairAmount);
-    }
-
-    ///------------------------------///
-    public void drops() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
-        inventory.setItem(0, itemHandler.getStackInSlot(0));
-        Containers.dropContents(this.level, this.worldPosition, inventory);
-    }
-
-    @Override
-    public Component getDisplayName() {
-        return CONTAINER_TITLE;
-    }
-
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-        return new RepairStationMenu(pContainerId, pPlayerInventory, this, this.data);
-    }
-
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ENERGY){
-            return energyOptional.cast();
-        }
-
-        if(cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
-        }
-
-        return super.getCapability(cap, side);
-    }
-
-    @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        lazyItemHandler.invalidate();
-        this.energyOptional.invalidate();
-    }
-
-    ///------------------------------///
-
-    private void sendUpdate() {
-        setChanged();
-
-        if(this.level != null)
-            this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
-    }
-
-    @Override
-    public @NotNull CompoundTag getUpdateTag() {
-        CompoundTag nbt = super.getUpdateTag();
-        saveAdditional(nbt);
-        return nbt;
-    }
-
-    @Nullable
-    @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
     }
 }

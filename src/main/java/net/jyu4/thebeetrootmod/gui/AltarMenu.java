@@ -1,10 +1,9 @@
 package net.jyu4.thebeetrootmod.gui;
 
-import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltar;
+import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltarOld;
 import net.jyu4.thebeetrootmod.block.ModBlocks;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -16,7 +15,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class AltarMenu extends AbstractContainerMenu {
 
-    public final BlockEntityAltar blockEntity;
+    public final BlockEntityAltarOld blockEntity;
     private final Level level;
     private final ContainerData data;
 
@@ -29,7 +28,7 @@ public class AltarMenu extends AbstractContainerMenu {
     public AltarMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.ALTAR_MENU.get(), pContainerId);
         checkContainerSize(inv, 8);
-        blockEntity = ((BlockEntityAltar) entity);
+        blockEntity = ((BlockEntityAltarOld) entity);
         this.level = inv.player.level();
         this.data = data;
 

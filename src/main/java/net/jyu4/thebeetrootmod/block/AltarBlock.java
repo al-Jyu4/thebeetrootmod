@@ -1,7 +1,7 @@
 package net.jyu4.thebeetrootmod.block;
 
+import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltarOld;
 import net.jyu4.thebeetrootmod.util.ModUtils;
-import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltar;
 import net.jyu4.thebeetrootmod.block.blockentity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -61,11 +61,11 @@ public class AltarBlock extends BaseEntityBlock {
         }
 
         BlockEntity be = pLevel.getBlockEntity(pPos);
-        if (!(be instanceof BlockEntityAltar)) {
+        if (!(be instanceof BlockEntityAltarOld)) {
             return InteractionResult.sidedSuccess(false);
         }
 
-        BlockEntityAltar altar = (BlockEntityAltar) be;
+        BlockEntityAltarOld altar = (BlockEntityAltarOld) be;
         if (!altar.isOwner(pPlayer)) {
             ModUtils.displayMessage(pPlayer, "block.thebeetrootmod.altar.not_owned");
             pLevel.playSound(null, pPos.getX(), pPos.getY(), pPos.getZ(), SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 1.0F, 1.0F);
@@ -80,8 +80,8 @@ public class AltarBlock extends BaseEntityBlock {
 
         BlockEntity be = pLevel.getBlockEntity(pPos);
 
-        if (be instanceof BlockEntityAltar && pPlacer instanceof Player) {
-            BlockEntityAltar station = (BlockEntityAltar) be;
+        if (be instanceof BlockEntityAltarOld && pPlacer instanceof Player) {
+            BlockEntityAltarOld station = (BlockEntityAltarOld) be;
             station.setOwner((Player) pPlacer);
         }
 
@@ -144,8 +144,8 @@ public class AltarBlock extends BaseEntityBlock {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof BlockEntityAltar) {
-                ((BlockEntityAltar) blockEntity).drops();
+            if (blockEntity instanceof BlockEntityAltarOld) {
+                ((BlockEntityAltarOld) blockEntity).drops();
             }
         }
 
@@ -155,7 +155,7 @@ public class AltarBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new BlockEntityAltar(pPos, pState);
+        return new BlockEntityAltarOld(pPos, pState);
     }
 
     @Nullable
