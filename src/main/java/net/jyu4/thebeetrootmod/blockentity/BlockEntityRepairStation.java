@@ -1,4 +1,4 @@
-package net.jyu4.thebeetrootmod.block.blockentity;
+package net.jyu4.thebeetrootmod.blockentity;
 
 import net.jyu4.thebeetrootmod.util.ModUtils;
 import net.jyu4.thebeetrootmod.gui.RepairStationMenu;
@@ -8,7 +8,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Containers;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

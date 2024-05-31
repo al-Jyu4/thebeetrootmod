@@ -1,6 +1,6 @@
 package net.jyu4.thebeetrootmod.gui;
 
-import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltarOld;
+import net.jyu4.thebeetrootmod.blockentity.BlockEntityAltarOld;
 import net.jyu4.thebeetrootmod.block.ModBlocks;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.FriendlyByteBuf;

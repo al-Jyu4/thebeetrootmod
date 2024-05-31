@@ -1,4 +1,4 @@
-package net.jyu4.thebeetrootmod.block.blockentity;
+package net.jyu4.thebeetrootmod.blockentity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -27,6 +27,7 @@ public class BlockEntityBase extends BlockEntity implements MenuProvider {
     public BlockEntityBase(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
+
     ///------------------------------///
     // base
 

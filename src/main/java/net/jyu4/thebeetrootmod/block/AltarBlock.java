@@ -1,8 +1,7 @@
 package net.jyu4.thebeetrootmod.block;
 
-import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityAltarOld;
+import net.jyu4.thebeetrootmod.blockentity.BlockEntityAltarOld;
 import net.jyu4.thebeetrootmod.util.ModUtils;
-import net.jyu4.thebeetrootmod.block.blockentity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -21,8 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;

@@ -1,4 +1,4 @@
-package net.jyu4.thebeetrootmod.registry;
+package net.jyu4.thebeetrootmod.util;
 
 import net.jyu4.thebeetrootmod.TheBeetrootMod;
 import net.jyu4.thebeetrootmod.block.ModBlocks;

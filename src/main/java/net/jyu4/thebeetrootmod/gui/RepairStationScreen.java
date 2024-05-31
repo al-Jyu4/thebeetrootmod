@@ -2,7 +2,7 @@ package net.jyu4.thebeetrootmod.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.jyu4.thebeetrootmod.TheBeetrootMod;
-import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityRepairStation;
+import net.jyu4.thebeetrootmod.blockentity.BlockEntityRepairStation;
 import net.jyu4.thebeetrootmod.net.MessageRepairItem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

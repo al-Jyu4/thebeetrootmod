@@ -1,7 +1,7 @@
 package net.jyu4.thebeetrootmod.net;
 
 import net.jyu4.thebeetrootmod.TheBeetrootMod;
-import net.jyu4.thebeetrootmod.block.blockentity.BlockEntityRepairStation;
+import net.jyu4.thebeetrootmod.blockentity.BlockEntityRepairStation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;

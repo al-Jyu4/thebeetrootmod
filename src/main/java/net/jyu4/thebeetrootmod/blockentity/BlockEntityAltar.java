@@ -1,11 +1,11 @@
-package net.jyu4.thebeetrootmod.block.blockentity;
+package net.jyu4.thebeetrootmod.blockentity;
 
 import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -15,7 +15,9 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Phantom;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -28,7 +30,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class BlockEntityAltar extends BlockEntity {
+public class BlockEntityAltar extends BlockEntityBase {
     private static final int BLOCK_REFRESH_RATE = 2;
     private static final int EFFECT_DURATION = 13;
     private static final float ROTATION_SPEED = -0.0375F;
@@ -52,10 +54,27 @@ public class BlockEntityAltar extends BlockEntity {
         super(ModBlockEntities.ALTAR_BE.get(), pPos, pBlockState);
     }
 
+    ///------------------------------///
+    // base
+
+    @Override
+    public Component getDisplayName() {
+        return null;
+    }
+
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+        return null;
+    }
+
+    ///------------------------------///
+    // save
+
     public void load(CompoundTag pTag) {
         super.load(pTag);
-        if (pTag.hasUUID("Target")) {
-            this.destroyTargetUUID = pTag.getUUID("Target");
+        if (pTag.hasUUID("target")) {
+            this.destroyTargetUUID = pTag.getUUID("target");
         } else {
             this.destroyTargetUUID = null;
         }
@@ -65,7 +84,7 @@ public class BlockEntityAltar extends BlockEntity {
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
         if (this.destroyTarget != null) {
-            pTag.putUUID("Target", this.destroyTarget.getUUID());
+            pTag.putUUID("target", this.destroyTarget.getUUID());
         }
 
     }

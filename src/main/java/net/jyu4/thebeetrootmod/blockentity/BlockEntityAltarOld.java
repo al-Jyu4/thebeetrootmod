@@ -1,4 +1,4 @@
-package net.jyu4.thebeetrootmod.block.blockentity;
+package net.jyu4.thebeetrootmod.blockentity;
 
 import net.jyu4.thebeetrootmod.gui.AltarMenu;
 import net.jyu4.thebeetrootmod.recipe.AltarRecipe;

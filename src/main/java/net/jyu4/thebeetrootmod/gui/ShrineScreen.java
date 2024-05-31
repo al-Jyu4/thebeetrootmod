@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class ShrineScreen extends AbstractContainerScreen<ShrineMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/base_gui.png");
+            new ResourceLocation(TheBeetrootMod.MODID, "textures/gui/temp0.png");
 
     public ShrineScreen(ShrineMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
