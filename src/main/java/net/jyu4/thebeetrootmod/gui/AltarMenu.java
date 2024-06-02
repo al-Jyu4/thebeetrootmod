@@ -17,20 +17,18 @@ public class AltarMenu extends AbstractContainerMenu {
 
     public final BlockEntityAltarOld blockEntity;
     private final Level level;
-    private final ContainerData data;
 
     private Button buttonSpawn;
 
     public AltarMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(8));
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
 
-    public AltarMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
+    public AltarMenu(int pContainerId, Inventory inv, BlockEntity entity) {
         super(ModMenuTypes.ALTAR_MENU.get(), pContainerId);
         checkContainerSize(inv, 8);
         blockEntity = ((BlockEntityAltarOld) entity);
         this.level = inv.player.level();
-        this.data = data;
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
@@ -42,7 +40,6 @@ public class AltarMenu extends AbstractContainerMenu {
             this.addSlot(new SlotItemHandler(iItemHandler, 3, 80, 35));
         });
 
-        addDataSlots(data);
     }
 
     @Override

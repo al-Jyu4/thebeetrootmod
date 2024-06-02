@@ -1,7 +1,10 @@
 package net.jyu4.thebeetrootmod.blockentity;
 
 import com.google.common.collect.Lists;
+import net.jyu4.thebeetrootmod.gui.AltarMenu;
+import net.jyu4.thebeetrootmod.gui.RepairStationMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -10,6 +13,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -18,6 +23,7 @@ import net.minecraft.world.entity.monster.Phantom;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -25,12 +31,24 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
 public class BlockEntityAltar extends BlockEntityBase {
+
+    private static final Component CONTAINER_TITLE = Component.translatable("block.thebeetrootmod.altar");
+
+    private final ItemStackHandler itemHandler = new ItemStackHandler(1);
+    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+
     private static final int BLOCK_REFRESH_RATE = 2;
     private static final int EFFECT_DURATION = 13;
     private static final float ROTATION_SPEED = -0.0375F;
@@ -50,22 +68,42 @@ public class BlockEntityAltar extends BlockEntityBase {
     private UUID destroyTargetUUID;
     private long nextAmbientSoundActivation;
 
+    ///------------------------------///
+    // base
+
     public BlockEntityAltar(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.ALTAR_BE.get(), pPos, pBlockState);
     }
 
-    ///------------------------------///
-    // base
-
     @Override
     public Component getDisplayName() {
-        return null;
+        return CONTAINER_TITLE;
     }
 
-    @org.jetbrains.annotations.Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-        return null;
+        return new AltarMenu(pContainerId, pPlayerInventory, this);
+    }
+
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+        if(cap == ForgeCapabilities.ITEM_HANDLER) {
+            return lazyItemHandler.cast();
+        }
+
+        return super.getCapability(cap, side);
+    }
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        lazyItemHandler.invalidate();
+    }
+
+    public void drops() {
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        inventory.setItem(0, itemHandler.getStackInSlot(0));
+        Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
     ///------------------------------///
@@ -89,6 +127,9 @@ public class BlockEntityAltar extends BlockEntityBase {
 
     }
 
+    ///------------------------------///
+    // update
+
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
@@ -96,6 +137,9 @@ public class BlockEntityAltar extends BlockEntityBase {
     public CompoundTag getUpdateTag() {
         return this.saveWithoutMetadata();
     }
+
+    ///------------------------------///
+    // functionalities
 
     public static void clientTick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntityAltar pBlockEntity) {
         ++pBlockEntity.tickCount;

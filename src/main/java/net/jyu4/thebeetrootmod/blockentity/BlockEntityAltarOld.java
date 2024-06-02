@@ -132,7 +132,7 @@ public class BlockEntityAltarOld extends BlockEntity implements MenuProvider {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-        return new AltarMenu(pContainerId, pPlayerInventory, this, this.data);
+        return new AltarMenu(pContainerId, pPlayerInventory, this);
     }
 
     @Override

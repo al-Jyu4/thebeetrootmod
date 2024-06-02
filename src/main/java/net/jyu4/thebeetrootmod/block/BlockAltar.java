@@ -1,6 +1,7 @@
 package net.jyu4.thebeetrootmod.block;
 
 import net.jyu4.thebeetrootmod.blockentity.BlockEntityAltar;
+import net.jyu4.thebeetrootmod.blockentity.BlockEntityRepairStation;
 import net.jyu4.thebeetrootmod.blockentity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -39,6 +40,17 @@ public class BlockAltar extends BlockBaseEntity {
 
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new BlockEntityAltar(pPos, pState);
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (pState.getBlock() != pNewState.getBlock()) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            if (blockEntity instanceof BlockEntityAltar) {
+                ((BlockEntityAltar) blockEntity).drops();
+            }
+        }
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
